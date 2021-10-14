@@ -1,0 +1,16 @@
+
+<div id='container'>
+    <div><h1>Admin Login</h1></div>
+    <form (ngSubmit)='onSubmit()' #loginForm='ngForm'>
+        <div id='inputField'>
+            <input #username='ngModel' id='username' name='username' type="text" required placeholder="Username" [(ngModel)]='credentials.username'>
+            <div [hidden]="username.valid || username.pristine" class='alert'> Username is required </div>
+        </div>  
+        <div id='inputField'>
+            <input #password='ngModel' id='password' name='password' required type="password" placeholder="Password" [(ngModel)]='credentials.password'>
+            <div [hidden]="password.valid || password.pristine" class='alert'> Password is required </div>
+        </div>
+        <button [disabled]='!loginForm.form.valid' type='submit'>Submit</button>
+    </form>
+    
+</div>
