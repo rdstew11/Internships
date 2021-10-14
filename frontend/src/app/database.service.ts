@@ -20,29 +20,22 @@ export class DatabaseService {
    * @param credentials  <LoginCrendentials> credentials to be validated
    * @returns  <LoginCredentials> if valid | null if invalid
    */
-  public validateLogin(credentials: LoginCredentials): LoginCredentials{
+  public getValidation(credentials: LoginCredentials): LoginCredentials{
     const username = credentials.username;
     const password = credentials.password;
-    const valid = false;
-    let resCredentials: LoginCredentials = {username:"", password:"", account_type:""};
+    let res: LoginCredentials = {username: "", password: "", account_type:""};
 
-    const options = username ? { params: new HttpParams().set('username', username) } : {};
-    const res = this.http.get<LoginCredentials>(this.acccountsUrl, options)
+    const options = username ? { params: new HttpParams().set('username', username).set('password', password) } : {};
+
+    //this get request sends username and password to backend to be validated against DB
+    this.http.get<LoginCredentials>(this.acccountsUrl, options)
       .pipe(
         retry(3), //retry failed requests 3 times
         catchError(this.handleError)  //then handle error
-      ).subscribe((data: LoginCredentials) => resCredentials = { ...data });
-
-    /**
-     * At this point the password should need to be unhashed
-     * But I'm not gonna worry about that just yet
-     */
-
-    if(resCredentials.username == username && resCredentials.password == password){
-      return resCredentials;
-    }else{
-      return null;
-    }
+      ).subscribe((data: LoginCredentials) => res = { ...data });
+    
+    
+    return res;
   }
 
 

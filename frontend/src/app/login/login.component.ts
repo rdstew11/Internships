@@ -12,10 +12,10 @@ export class LoginComponent  {
 
   credentials: LoginCredentials = {account_type: "admin", username: "", password: "" };
 
-  constructor(private database: DatabaseService) { }
+  constructor(private backend: DatabaseService) { }
 
   onSubmit(){
-    console.log("Submitted\nUsername: " + this.credentials.username + "\nPassword: " + this.credentials.password);
+    this.credentials = this.backend.getValidation(this.credentials);
   }
 
 }
