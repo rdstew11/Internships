@@ -20,18 +20,21 @@
     border-radius: .25rem;
 }
 
-/**
 button{
     margin: 1rem 0 ;
     width: 100%;
-    background-color: #2596be;
-    color: white;
     border: none;
     line-height: 16pt;
     padding: .25rem;
     border-radius: .25rem;
 }
-*/
+
+
+button:active{
+    background-color: #218db4;
+    color: white;
+}
+
 .alert{
     margin:0 auto auto auto;
     background-color: #d3b1b0;
@@ -47,11 +50,3 @@ button:hover{
 }
 */
 
-
-.ng-valid[required], .ng-valid.required {
-    border-left: 5px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
-  }

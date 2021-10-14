@@ -1,0 +1,36 @@
+#container{
+    text-align: center;
+    font-family:sans-serif; 
+    max-width: 40rem;
+}
+
+#form-input{
+    margin: .5rem 0;
+    display:flex;
+    justify-content: space-between
+}
+
+textarea{
+    width: 100%;
+    height:10rem;
+}
+
+.m-left-5{
+    margin-left: .5rem;
+}
+
+.dates{
+    width:10rem;
+}
+
+label{
+    line-height: 1.5rem;
+}
+
+
+
+input{
+    line-height:1.5rem;
+    width: 30rem;
+    margin: 0 0 0 .5rem;
+}

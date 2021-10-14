@@ -1,0 +1,34 @@
+<div id='container'>
+    <h1> Submit a Job </h1>
+    <form #submissionForm='ngForm' id='jobForm' >
+        <div id='form-input'>
+            <label for='title'>Title</label>
+            <input type='text' id='title' name='title' required>
+        </div>
+        <div id='form-input'>
+            <label for='company_name'> Company Name</label>
+            <input id='company_name' name='company_name' type='text' required>
+        </div>
+        <div id='form-input'>
+            <label for='city'>City</label>
+            <input id='city' name='city' type='text' required>
+            <label class='m-left-5' for='state'>State</label>
+            <input id='state' name='state' type='text' required>
+        </div>
+        <div id='form-input'>
+            <label for='start_date'>Start Date</label>
+            <input class='dates' id='start_date' name='start_date' type='date'>
+            <label class='m-left-5' for='expiration'>Expiration Date</label>
+            <input class='dates' id='expiration' name='expiration' type='date' required>
+        </div>
+        <div id='form-input'>
+            <label for='external_link'>Link</label>
+            <input id='external_link' name='external_link' type='text'>
+        </div>
+        <div id='form-input'>
+            <textarea form='jobForm' required></textarea>
+        </div>
+        
+        <button type='submit'>Submit</button>
+    </form>
+</div>
