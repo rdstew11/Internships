@@ -2,13 +2,36 @@
     text-align: center;
     font-family:sans-serif; 
     max-width: 40rem;
+    padding: .1rem;
+    border: 2px solid black;
+    border-radius: .5rem;
+    padding: 0 2rem;
 }
+
 
 #form-input{
     margin: .5rem 0;
     display:flex;
-    justify-content: space-between
+    justify-content: space-between;
+    padding: .4rem 0 ;
 }
+
+#form-input.location{
+    padding:0;
+}
+#form-input.dates{
+    padding: 0;
+    text-align: left;
+}
+#form-input.dates>*{
+    flex:1 1 15rem;
+}
+
+.inputField{
+    border-radius: .25rem;
+    border: 1px solid black;
+}
+
 
 textarea{
     width: 100%;
@@ -19,18 +42,80 @@ textarea{
     margin-left: .5rem;
 }
 
+
+
+.location{
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.location div{
+    margin: .5rem 0;
+
+}
+.location input{
+    width: 15rem;
+}
+
+
+
+
 .dates{
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.dates div{
+    margin: .5rem 0;
+    flex-grow: 1;
+    min-width:50%
+}
+.dates input{ 
     width:10rem;
+    text-align: right;
+}
+
+.dates label{
+    min-width: 50%;
 }
 
 label{
     line-height: 1.5rem;
+    width: 5rem;
+    text-align: center;
 }
+
+button:disabled{
+    background-color:#868686;
+    color:black;
+}
+form.ng-valid button{
+    background-color: #218db4;
+    color: white;
+}
+
+button{
+    margin: 1rem 0 ;
+    width: 50%;
+    border: none;
+    line-height: 1.5rem;
+    padding: .25rem;
+    border-radius: .25rem;
+}
+
+.alert{
+    margin:0 auto auto auto;
+    background-color: #d3b1b0;
+    color: #a94442;
+    line-height:2rem;
+    height:2rem;
+}
+
 
 
 
 input{
     line-height:1.5rem;
-    width: 30rem;
-    margin: 0 0 0 .5rem;
+    width: 100%;
+    margin: 0 auto auto .5rem;
 }

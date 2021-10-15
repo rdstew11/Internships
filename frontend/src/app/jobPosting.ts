@@ -1,4 +1,4 @@
-export interface JobSubmission{
+export interface JobPosting{
     title: String,
     company_name: String,
     city: String,

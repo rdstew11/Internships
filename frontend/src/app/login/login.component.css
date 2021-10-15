@@ -18,21 +18,31 @@
     width: 97.5%;
     line-height: 24pt;
     border-radius: .25rem;
+    border: 1px solid black;
 }
 
 button{
-    margin: 1rem 0 ;
+    margin: 1rem 0;
     width: 100%;
     border: none;
-    line-height: 16pt;
+    line-height: 1.5rem;
     padding: .25rem;
     border-radius: .25rem;
 }
 
+button:disabled{
+    background-color:#868686;
+    color:black;
+}
 
-button:active{
+
+form.ng-valid button{
     background-color: #218db4;
     color: white;
+}
+
+form.ng-valid button:hover{
+    cursor: pointer;
 }
 
 .alert{
@@ -43,10 +53,4 @@ button:active{
     height:2rem;
 }
 
-/**
-button:hover{
-    cursor: pointer;
-    background-color: #26a0cc;
-}
-*/
 
