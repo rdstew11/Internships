@@ -5,7 +5,7 @@ export interface JobPosting{
     state: String,
     description: String,
     start_date?: Date,
-    end_date: Date,
+    end_date?: Date,
     approved?: Boolean,
     alumni?: Boolean,
     external_link?: String

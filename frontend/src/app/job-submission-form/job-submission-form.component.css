@@ -11,20 +11,16 @@
 
 #form-input{
     margin: .5rem 0;
-    display:flex;
-    justify-content: space-between;
     padding: .4rem 0 ;
 }
 
 #form-input.location{
     padding:0;
+    display:flex;
+    justify-content: space-between;
 }
 #form-input.dates{
     padding: 0;
-    text-align: left;
-}
-#form-input.dates>*{
-    flex:1 1 15rem;
 }
 
 .inputField{
@@ -32,10 +28,11 @@
     border: 1px solid black;
 }
 
-
 textarea{
     width: 100%;
     height:10rem;
+    box-sizing: border-box;
+    margin: auto auto 0 auto;
 }
 
 .m-left-5{
@@ -53,10 +50,15 @@ textarea{
     margin: .5rem 0;
 
 }
-.location input{
-    width: 15rem;
+
+.location input[type='text']{
+    width:10rem;
 }
 
+.location input[type='date']{
+    width:10rem;
+    margin-left: .5rem;
+}
 
 
 
@@ -104,18 +106,21 @@ button{
 }
 
 .alert{
-    margin:0 auto auto auto;
+    margin:0 auto auto auto !important; 
     background-color: #d3b1b0;
+    width:100%;
     color: #a94442;
     line-height:2rem;
     height:2rem;
 }
 
-
-
-
 input{
+    box-sizing: border-box;
     line-height:1.5rem;
     width: 100%;
-    margin: 0 auto auto .5rem;
+}
+
+#description p{
+    text-align: left;
+    margin-bottom: .25rem;
 }

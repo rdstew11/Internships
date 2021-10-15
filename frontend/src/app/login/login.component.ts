@@ -8,6 +8,7 @@ import { DatabaseService } from '../database.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent  {
 
   credentials: LoginCredentials = {account_type: "admin", username: "", password: "" };

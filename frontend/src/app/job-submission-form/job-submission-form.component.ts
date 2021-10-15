@@ -15,7 +15,6 @@ export class JobSubmissionFormComponent {
     company_name: "",
     city: "",
     state: "",
-    end_date: new Date(),
     description: ""
 
 }
@@ -31,7 +30,9 @@ export class JobSubmissionFormComponent {
    * Uses backend service to submit POST request to backend service
    */
   onSubmit(){
-    this.backend.addJob(this.submissionDetails);
+    //this.backend.addJob(this.submissionDetails);
+    console.log(this.submissionDetails.end_date);
+    //NEED TO IMPLEMENT ROUTING DEPENDENT ON RESPONSE
   }
 
 }

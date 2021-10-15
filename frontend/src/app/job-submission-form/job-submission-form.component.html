@@ -1,35 +1,38 @@
 <div id='container'>
     <h1> Submit a Job </h1>
     <form #submissionForm='ngForm' (ngSubmit)='onSubmit()' id='jobForm' >
-        <div id='form-input' >
+        <div id='form-input'>
             <input #title='ngModel' placeholder='Job Title' class='inputField' [(ngModel)]='submissionDetails.title' type='text' id='title' name='title' required>
+            <div [hidden]="title.valid || title.pristine" class='alert'> Title is required </div>
         </div>
         <div id='form-input'>
-            <input #company_name='ngModel' placeholder='Company' class='inputField' [(ngModel)]='submissionDetails.company_name'id='company_name' name='company_name' type='text' required>
+            <input #company_name='ngModel' placeholder='Company Name' class='inputField' [(ngModel)]='submissionDetails.company_name'id='company_name' name='company_name' type='text' required>
+            <div [hidden]="company_name.valid || company_name.pristine" class='alert'> Company name is required </div>
         </div>
         <div class='location' id="form-input">
             <div>
                 <input #city='ngModel' placeholder='City' class='inputField' [(ngModel)]='submissionDetails.city' id='city' name='city' type='text' required>
+                <div [hidden]="city.valid || city.pristine" class='alert'> City is required </div>
             </div>
             <div>
                 <input #state='ngModel' placeholder='State' class='inputField' [(ngModel)]='submissionDetails.state' id='state' name='state' type='text' required>
-            </div>
-        </div>
-        <div id='form-input' class='dates'>
-            <div>
-                <label for='start_date'>Start Date</label>
-                <input #start_date='ngModel' class='inputField' [(ngModel)]='submissionDetails.start_date' id='start_date' name='start_date' type='date'>
+                <div [hidden]="state.valid || state.pristine" class='alert'> State is required </div>
             </div>
             <div>
-                <label class='m-left-5' for='expiration'>Expiration Date</label>
+                <label class='m-left-5' for='expiration'>Expiration</label>
                 <input #end_date='ngModel' class='inputField' [(ngModel)]='submissionDetails.end_date' id='expiration' name='expiration' type='date' required>
+                <div [hidden]="end_date.valid || end_date.pristine" class='alert'> Expiration is required </div>
             </div>
         </div>
+
         <div id='form-input'>
             <input #external_link='ngModel' placeholder='External Link' class='inputField' [(ngModel)]='submissionDetails.external_link' id='external_link' name='external_link' type='text'>
         </div>
-        <div id='form-input'>
+        <div id='description'>
+            
+            <p><b>Description</b></p>
             <textarea #description='ngModel' name='description' class='inputField' [(ngModel)]='submissionDetails.description' form='jobForm' required></textarea>
+            <div [hidden]="description.valid || description.pristine" class='alert'> Description is required </div>
         </div>
         
         <button [disabled]='!submissionForm.form.valid'  type='submit'>Submit</button>
