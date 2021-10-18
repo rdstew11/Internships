@@ -23,7 +23,8 @@ CREATE TABLE postings (
     end_date DATE NOT NULL,
     approved BOOLEAN DEFAULT FALSE,
     alumni BOOLEAN DEFAULT FALSE,
-    external_link TEXT
+    external_link TEXT,
+    PRIMARY KEY ("posting_id")
 );
 `;
 
@@ -34,6 +35,10 @@ VALUES (1, 'IT Specialist', 'Google', 'Arlington', 'VA', 'All IT needs', '2021-1
 
 const getJobListing = `
 SELECT * FROM postings
+`;
+
+const getUnapprovedJobListing = `
+SELECT * FROM postings WHERE approved = FALSE
 `;
 
 const removeJobListing = `
@@ -49,7 +54,7 @@ DELETE FROM postings WHERE posting_id = 1
 `;
 
 client.query(createPostingsTable, (err, res) => {
-    if(err){
+    if (err) {
         console.error(err);
         return;
     }
@@ -57,16 +62,26 @@ client.query(createPostingsTable, (err, res) => {
 });
 
 client.query(addJobListing, (err, res) => {
-    if(err){
+    if (err) {
         console.error(err);
         return;
     }
     console.log('Added job listing successfully');
 });
 
-client.query(getJobListing, (err, res) =>{
-    if(err) {
+client.query(getJobListing, (err, res) => {
+    if (err) {
         console.error(err);
+        return;
+    }
+    for(let row of res.rows){
+        console.log(row);
+    }
+});
+
+client.query(getUnapprovedJobListing, (err, res) => {
+    if (err) {
+        consolve.error(err);
         return;
     }
     for(let row of res.rows){
@@ -82,7 +97,7 @@ client.query(removeJobListing, (err, res) => {
     console.log('Job Posting Expired: Data delete successful');
 });
 
-client.query(approveJobListing, (err, res) =>{
+client.query(approveJobListing, (err, res) => {
     if (err) {
         console.error(err);
         return;
