@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 
-const client = new Client({
+const db = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'internships',
@@ -8,7 +8,7 @@ const client = new Client({
     port: 8080,
 });
 
-client.connect();
+db.connect();
 
 async function addPost(q){
     try{
@@ -19,7 +19,7 @@ async function addPost(q){
         const description = q.description;
         const start_date = q.start_date;
         const end_date = q.end_date;
-        const res = await client.query(`INSERT INTO postings (title, company_name, city, state, description, start_date, end_date) VALUES ('${title}', '${company_name}', '${city}', '${state}', '${description}', '${start_date}', '${end_date}');`);
+        const res = await db.query(`INSERT INTO postings (title, company_name, city, state, description, start_date, end_date) VALUES ('${title}', '${company_name}', '${city}', '${state}', '${description}', '${start_date}', '${end_date}');`);
         console.log(res);
         return res;
     }catch(err){
@@ -30,7 +30,7 @@ async function addPost(q){
 
 async function getPosts(){
     try{
-        const res = await client.query(`SELECT * FROM postings;`);
+        const res = await db.query(`SELECT * FROM postings;`);
         console.log(res)
         return res;
     }catch(err){
@@ -41,7 +41,7 @@ async function getPosts(){
 
 async function removePost(date){
     try{
-        const res = client.query(`DELETE FROM postings WHERE end_date='${date}';`);
+        const res = db.query(`DELETE FROM postings WHERE end_date='${date}';`);
         console.log(res);
         return res;
     }catch(err){
