@@ -17,7 +17,9 @@ async function addAccount(q){
         const at = q.account_type;
         const res = await db.query(`INSERT INTO accounts (username, password, account_type) VALUES ('${un}', '${pw}', '${at}');`);
         console.log(res);
+        return res;
     }catch(err){
         console.log(err.stack);
+        return err;
     }
 }
