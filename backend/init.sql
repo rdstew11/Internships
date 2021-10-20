@@ -18,3 +18,13 @@ CREATE TABLE postings (
     alumni BOOLEAN DEFAULT FALSE,
     external_link TEXT
 );
+
+DROP TABLE IF EXISTS company ;
+CREATE TABLE company (
+	name TEXT NOT NULL,
+	address TEXT NOT NULL,
+	description TEXT NOT NULL,
+	website_link TEXT,
+	posting_id TEXT NOT NULL,
+	approved BOOLEAN DEFAULT FALSE
+);
