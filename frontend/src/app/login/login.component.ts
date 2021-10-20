@@ -4,7 +4,7 @@ import { LoginCredentials } from '../loginCredentials';
 import { DatabaseService } from '../database.service';
 
 @Component({
-  selector: 'loginForm',
+  selector: 'login-form',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

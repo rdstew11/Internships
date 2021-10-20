@@ -64,6 +64,20 @@ export class DatabaseService {
       );
   }
 
+  public getAllJobs() :JobPosting[]{
+
+    let res :JobPosting[] = [];
+
+    //TO DO
+
+    return res;
+  }
+
+
+
+
+
+
 
   /**
    * Basic error handling on request to backend server

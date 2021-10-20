@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { JobSubmissionFormComponent } from './job-submission-form/job-submission-form.component';
+import { JobPreviewComponent } from './job-preview/job-preview.component';
+import { JobBrowseComponent } from './job-browse/job-browse.component';
 
 
 
@@ -17,7 +19,9 @@ import { JobSubmissionFormComponent } from './job-submission-form/job-submission
     AppComponent,
     LoginComponent,
     ProfileComponent,
-    JobSubmissionFormComponent
+    JobSubmissionFormComponent,
+    JobPreviewComponent,
+    JobBrowseComponent
   ],
   imports: [
     BrowserModule,

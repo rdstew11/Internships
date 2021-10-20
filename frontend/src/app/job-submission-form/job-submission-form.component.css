@@ -96,6 +96,10 @@ form.ng-valid button{
     color: white;
 }
 
+form.ng-valid button:hover{
+    cursor: pointer;
+}
+
 button{
     margin: 1rem 0 ;
     width: 50%;
@@ -104,6 +108,7 @@ button{
     padding: .25rem;
     border-radius: .25rem;
 }
+
 
 .alert{
     margin:0 auto auto auto !important; 
