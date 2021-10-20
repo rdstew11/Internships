@@ -23,3 +23,14 @@ async function addAccount(q){
         return err;
     }
 }
+
+async function validateAccount(un, pw){
+    try{
+        const res = await db.query(`SELECT account_type FROM accounts HWERE (username = ${un} AND password = ${pw});`);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
+}
