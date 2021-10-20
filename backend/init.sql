@@ -7,6 +7,7 @@ CREATE TABLE accounts (
 
 DROP TABLE IF EXISTS postings ;
 CREATE TABLE postings (
+    id INTEGER NOT NULL,
     title TEXT NOT NULL,
     company_name TEXT NOT NULL,
     city TEXT NOT NULL,
@@ -16,5 +17,6 @@ CREATE TABLE postings (
     end_date DATE NOT NULL,
     approved BOOLEAN DEFAULT FALSE,
     alumni BOOLEAN DEFAULT FALSE,
-    external_link TEXT
+    external_link TEXT,
+    PRIMARY KEY ("id")
 );

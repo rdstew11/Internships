@@ -49,3 +49,36 @@ async function removePost(date){
         return err;
     }
 }
+
+async function getUnapprovedPosts(){
+    try{
+        const res = db.query(`SELECT * FROM postings WHERE approved = FALSE;`);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
+}
+
+async function approvePost(id){
+    try{
+        const res = db.query(`UPDATE postings SET approved = True WHERE id = ${id};`);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack)
+        return err;
+    }
+}
+
+async function denyPost(id){
+    try{
+        const res = db.query(`DELETE FROM postings WHERE id = ${id};`);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
+}
