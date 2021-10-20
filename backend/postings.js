@@ -1,16 +1,4 @@
-const { Client } = require('pg');
-
-const db = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'internships',
-    password: 'password',
-    port: 8080,
-});
-
-db.connect();
-
-async function addPost(q){
+export async function addPost(db, q){
     try{
         const title = q.title;
         const company_name = q.company_name;
@@ -28,7 +16,7 @@ async function addPost(q){
     }
 }
 
-async function getPosts(){
+export async function getPosts(db){
     try{
         const res = await db.query(`SELECT * FROM postings;`);
         console.log(res)
@@ -39,7 +27,7 @@ async function getPosts(){
     }
 }
 
-async function removePost(date){
+export async function removePost(db, date){
     try{
         const res = db.query(`DELETE FROM postings WHERE end_date='${date}';`);
         console.log(res);
@@ -50,7 +38,7 @@ async function removePost(date){
     }
 }
 
-async function getUnapprovedPosts(){
+export async function getUnapprovedPosts(db){
     try{
         const res = db.query(`SELECT * FROM postings WHERE approved = FALSE;`);
         console.log(res);
@@ -61,7 +49,7 @@ async function getUnapprovedPosts(){
     }
 }
 
-async function approvePost(id){
+export async function approvePost(db, id){
     try{
         const res = db.query(`UPDATE postings SET approved = True WHERE id = ${id};`);
         console.log(res);
@@ -72,7 +60,7 @@ async function approvePost(id){
     }
 }
 
-async function denyPost(id){
+export async function denyPost(db, id){
     try{
         const res = db.query(`DELETE FROM postings WHERE id = ${id};`);
         console.log(res);

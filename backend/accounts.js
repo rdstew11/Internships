@@ -1,16 +1,6 @@
-const { Client } = require('pg');
 
-const db = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'internships',
-    password: 'password',
-    port: 8080,
-});
 
-db.connect();
-
-async function addAccount(q){
+export async function addAccount(db, q){
     try{
         const un = q.username;
         const pw = q.password;
@@ -24,7 +14,7 @@ async function addAccount(q){
     }
 }
 
-async function validateAccount(un, pw){
+export async function validateAccount(db, un, pw){
     try{
         const res = await db.query(`SELECT account_type FROM accounts HWERE (username = ${un} AND password = ${pw});`);
         console.log(res);
