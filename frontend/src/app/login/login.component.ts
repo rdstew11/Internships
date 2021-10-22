@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { LoginCredentials } from '../loginCredentials';
 import { DatabaseService } from '../database.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'login-form',
@@ -16,7 +17,7 @@ export class LoginComponent  {
   /**
    * @param backend Service used to communicate with the backend 
    */
-  constructor(private backend: DatabaseService) { }
+  constructor(private backend: DatabaseService, private auth: AuthService) { }
 
 
   /**
@@ -24,7 +25,7 @@ export class LoginComponent  {
    * Uses a GET request to validate credentials in the backend
    */
   onSubmit(){
-    this.credentials = this.backend.getValidation(this.credentials);
+   this.auth.login(this.credentials);
 
     //NEED TO IMPLEMENT ROUTING DEPENDENT ON RESPONSE
   }

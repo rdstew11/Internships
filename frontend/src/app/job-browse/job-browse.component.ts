@@ -16,6 +16,7 @@ export class JobBrowseComponent implements OnInit {
     state: 'VA',
     description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
     start_date: new Date(),
+    email: 'rdstew11@gmail.com'
   },
   {
     title: 'Software Engineer',
@@ -24,6 +25,7 @@ export class JobBrowseComponent implements OnInit {
     state: 'VA',
     description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
     start_date: new Date(),
+    email: 'rdstew11@gmail.com'
   },
   {
     title: 'Software Engineer',
@@ -32,6 +34,7 @@ export class JobBrowseComponent implements OnInit {
     state: 'VA',
     description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
     start_date: new Date(),
+    email: 'rdstew11@gmail.com'
   },
 
 

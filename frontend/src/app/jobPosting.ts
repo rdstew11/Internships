@@ -9,4 +9,6 @@ export interface JobPosting{
     approved?: Boolean,
     alumni?: Boolean,
     external_link?: String
+    phone_number?: String,
+    email: String,
 };

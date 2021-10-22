@@ -15,7 +15,8 @@ export class JobSubmissionFormComponent {
     company_name: "",
     city: "",
     state: "",
-    description: ""
+    description: "",
+    email: ""
 
 }
 

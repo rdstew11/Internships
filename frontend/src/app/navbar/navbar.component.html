@@ -1,0 +1,27 @@
+<nav class='navbar navbar-expand-md navbar-dark p-0' style='background-color: #002b5a; color: white'>
+    <a class='nav-brand ml-4 '>CPSC Jop Portal</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class='collapse navbar-collapse justify-content-center' id="#collapsibleNavbar">
+        <ul class='navbar-nav my-auto'>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/submit'>Submit a Job</a>
+            </li>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/browse'>Browse Jobs</a>
+            </li>
+            <li [hidden]='accountType!="none"' class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/login'>Login</a>
+            </li>
+            <li [hidden]='accountType!="admin"' class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
+            </li>
+            <li [hidden]='accountType=="none"' class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/logout'>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

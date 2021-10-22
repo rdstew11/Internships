@@ -1,16 +1,20 @@
 
-<div class='container text-center'>
-    <div><h1>Admin Login</h1></div>
-    <form (ngSubmit)='onSubmit()' #loginForm='ngForm'>
+<div class='container text-center rounded p-4' style='max-width: 30rem; background-color: #002b5a; color:white; border: 3px solid #910000; border-radius: .5rem;'>
+    <div class='my-4'><h1><b>Admin Login</b></h1></div>
+    <form (ngSubmit)='onSubmit()' #loginForm='ngForm'> <!--104B8B-->
         <div id='inputField'>
             <input #username='ngModel' id='username' name='username' type="text" required placeholder="Username" [(ngModel)]='credentials.username'>
-            <div [hidden]="username.valid || username.pristine" class='alert'> Username is required </div>
+            <div [hidden]="username.valid || username.pristine" class='alert p-0'> <p>Username is required</p> </div>
         </div>  
         <div id='inputField'>
             <input #password='ngModel' id='password' name='password' required type="password" placeholder="Password" [(ngModel)]='credentials.password'>
-            <div [hidden]="password.valid || password.pristine" class='alert'> Password is required </div>
+            <div [hidden]="password.valid || password.pristine" class='alert p-0'> <p>Password is required</p> </div>
         </div>
         <button [disabled]='!loginForm.form.valid' type='submit'>Submit</button>
     </form>
     
+
+    <div>
+        <a href="#">Continue without loggin in</a>
+    </div>
 </div>
