@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
-import { LoginCredentials } from './loginCredentials';
 import { JobPosting } from './jobPosting';
 
 @Injectable({

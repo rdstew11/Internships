@@ -13,14 +13,14 @@
             <li class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/browse'>Browse Jobs</a>
             </li>
-            <li [hidden]='accountType!="none"' class='nav-item active'>
+            <li *ngIf='!isLoggedIn' class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/login'>Login</a>
             </li>
-            <li [hidden]='accountType!="admin"' class='nav-item active'>
+            <li *ngIf='isLoggedIn' class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
             </li>
-            <li [hidden]='accountType=="none"' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/logout'>Logout</a>
+            <li *ngIf='isLoggedIn' class='nav-item active'>
+                <a class='nav-link p-3' (click)='logout()'>Logout</a>
             </li>
         </ul>
     </div>

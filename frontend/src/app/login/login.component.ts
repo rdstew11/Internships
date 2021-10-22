@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { LoginCredentials } from '../loginCredentials';
 import { DatabaseService } from '../database.service';
@@ -17,7 +18,7 @@ export class LoginComponent  {
   /**
    * @param backend Service used to communicate with the backend 
    */
-  constructor(private backend: DatabaseService, private auth: AuthService) { }
+  constructor(private backend: DatabaseService, private auth: AuthService, private router: Router) { }
 
 
   /**
@@ -25,9 +26,7 @@ export class LoginComponent  {
    * Uses a GET request to validate credentials in the backend
    */
   onSubmit(){
-   this.auth.login(this.credentials);
-
-    //NEED TO IMPLEMENT ROUTING DEPENDENT ON RESPONSE
+    this.auth.login(this.credentials);
   }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError,shareReplay } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { LoginCredentials } from './loginCredentials';
 
@@ -13,8 +14,9 @@ import { LoginCredentials } from './loginCredentials';
 export class AuthService {
 
   loginUrl = 'http://127.0.0.1:8080/login';
+  loggedIn: Boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   /**
  * makes POST request to validate given credentials in the backend 
@@ -24,8 +26,6 @@ export class AuthService {
  * @param credentials  <LoginCrendentials> credentials to be validated
  */
   public login(credentials: LoginCredentials){
-
-    let tokens: any = null;
     //this POST request sends username and password to backend to be validated against DB
     this.http.post<any>(this.loginUrl, credentials).pipe(catchError(this.handleLoginError),shareReplay(1)).subscribe(res => this.setSession(res));
   }
@@ -38,21 +38,20 @@ export class AuthService {
   private setSession(authResult: any){
     const expiresAt = new Date();
     expiresAt.setSeconds(expiresAt.getSeconds() + authResult.expiration);
-    console.log(expiresAt);
   
     localStorage.setItem('id_token', authResult.jwt)
     localStorage.setItem('expiration', JSON.stringify(expiresAt.valueOf()));
-
-    console.log(this.isLoggedIn());
-
+    
+    this.router.navigate(['/admin']);
+    this.loggedIn = true;
   }
 
   /**
    * Removes token from browser storage
    */
   public logout(){
-    localStorage.remove('id_token');
-    localStorage.remove('expiration');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expiration');
   }
 
   public isLoggedIn():Boolean{
