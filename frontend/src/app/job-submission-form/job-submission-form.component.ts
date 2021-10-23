@@ -11,6 +11,7 @@ import { DatabaseService } from '../database.service';
 export class JobSubmissionFormComponent {
 
   submissionDetails: JobPosting = {
+    id: -1,
     title: "",
     company_name: "",
     city: "",

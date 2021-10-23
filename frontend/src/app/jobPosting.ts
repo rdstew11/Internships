@@ -1,4 +1,5 @@
 export interface JobPosting{
+    id: number,
     title: String,
     company_name: String,
     city: String,

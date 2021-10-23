@@ -11,6 +11,7 @@ import { DatabaseService } from '../database.service';
 export class JobPostingComponent implements OnInit {
 
   @Input() job: JobPosting = {
+    id:1,
     title: 'Software Engineer',
     company_name: 'Google',
     city: 'Reston',

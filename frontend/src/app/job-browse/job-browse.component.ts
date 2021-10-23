@@ -10,6 +10,7 @@ import { JobPosting } from '../jobPosting'
 export class JobBrowseComponent implements OnInit {
 
   jobs: JobPosting[] = [{
+    id: 1,
     title: 'Software Engineer',
     company_name: 'Google',
     city: 'Reston',
@@ -19,6 +20,7 @@ export class JobBrowseComponent implements OnInit {
     email: 'rdstew11@gmail.com'
   },
   {
+    id: 2,
     title: 'Software Engineer',
     company_name: 'Google',
     city: 'Reston',
@@ -28,6 +30,7 @@ export class JobBrowseComponent implements OnInit {
     email: 'rdstew11@gmail.com'
   },
   {
+    id: 3,
     title: 'Software Engineer',
     company_name: 'Google',
     city: 'Reston',

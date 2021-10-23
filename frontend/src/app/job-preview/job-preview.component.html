@@ -1,18 +1,28 @@
-<div class='container border border-dark rounded d-flex flex-wrap position-relative justify-content-between p-3 mx-auto my-2'>
-    
-    <div class='container'>
+<!-- Job Card-->
+<div class="container p-0" id='jobListing'>
+    <div class="card-header m-0">
         <div class='row text-left'>
             <div class='col-6 p-0'>
-                <div class='font-weight-bold'><h4 class='d-inline'>{{job.title}} &mdash;     {{job.company_name}}</h4></div>
-                
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+job.id' aria-expanded='false'>
+                    <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
+                </button>                    
             </div>
             <div class='col text-right'>
                 <h6>{{job.city}}, {{job.state}}</h6>
                 <div> Posted: {{job.start_date | date:'shortDate'}}</div> 
             </div>
         </div>
-
+            
+        
     </div>
-   
-
+    <div [id]='"collapse" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+        <div class="card-body">
+            <h5 class="card-title"><b>Description</b></h5>
+            <p class="card-text">{{job.description}}</p> 
+            <h5><b>Contact</b></h5>
+            <a class='my-0' *ngIf='job.external_link' [href]='job.external_link'>{{job.external_link}}</a>
+            <p class='my-0'>{{job.email}}</p>
+            <p class='my-0' *ngIf='job.phone_number'>{{job.phone_number}}</p>
+        </div>
+    </div>
 </div>

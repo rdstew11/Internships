@@ -14,6 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { IndexComponent } from './index/index.component';
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
+import { AdminJobPreviewComponent } from './admin-job-preview/admin-job-preview.component';
+import { AdminJobModalComponent } from './admin-job-modal/admin-job-modal.component';
 
 
 
@@ -28,7 +30,9 @@ import { AdminPortalComponent } from './admin-portal/admin-portal.component';
     NavbarComponent,
     LoginPageComponent,
     IndexComponent,
-    AdminPortalComponent
+    AdminPortalComponent,
+    AdminJobPreviewComponent,
+    AdminJobModalComponent
   ],
   imports: [
     BrowserModule,

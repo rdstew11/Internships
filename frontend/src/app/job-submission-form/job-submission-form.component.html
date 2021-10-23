@@ -1,4 +1,4 @@
-<div class='container text-center border border-dark rounded'>
+<div class='container text-center bg-white rounded mt-5 p-5' style='max-width: 50rem;'>
     <h1> Submit a Job </h1>
     <form #submissionForm='ngForm' (ngSubmit)='onSubmit()' id='jobForm' >
         <div id='form-input'>
@@ -18,20 +18,22 @@
                 <input #state='ngModel' placeholder='State' class='inputField' [(ngModel)]='submissionDetails.state' id='state' name='state' type='text' required>
                 <div [hidden]="state.valid || state.pristine" class='alert'> State is required </div>
             </div>
-            <div class='col p-0 ml-2'>
+            <div class='col  p-0 ml-2'>
                 <label class='m-left-5' for='expiration'>Expiration</label>
-                <input #end_date='ngModel' class='inputField w-75' [(ngModel)]='submissionDetails.end_date' id='expiration' name='expiration' type='date' required>
+                <input #end_date='ngModel' class='inputField w-75' [(ngModel)]='submissionDetails.end_date' 
+                id='expiration' name='expiration' type='date'
+                style='max-width: 8rem;'  required>
                 <div [hidden]="end_date.valid || end_date.pristine" class='alert'> Expiration is required </div>
             </div>
         </div>
 
         <div id='form-input' class='row'>
             <div class='col-8 mr-2 p-0'>
-                <input placeholder="email" [(ngModel)]='submissionDetails.email' #email='ngModel' id='email' name='email' type='text' required >
+                <input placeholder="Email" class='inputField' [(ngModel)]='submissionDetails.email' #email='ngModel' id='email' name='email' type='text' required >
                 <div [hidden]="email.valid || email.pristine" class='alert'> Email is required </div>
             </div>
             <div class='col ml-2 p-0'>
-                <input placeholder='###-###-####' [(ngModel)]='submissionDetails.phone_number' #phone='ngModel' id='phone_number' name='phone_number'>
+                <input placeholder='###-###-####' class='inputField' [(ngModel)]='submissionDetails.phone_number' #phone='ngModel' id='phone_number' name='phone_number'>
             </div>
             
         </div>
