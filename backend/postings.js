@@ -39,7 +39,7 @@ async function getPosts(pool){
 
 async function removePost(pool, date){
     try{
-        const template = "DELETE FROM postings WHEREE end_date = $1;";
+        const template = "DELETE FROM postings WHERE end_date = $1;";
         const res = pool.query(template, [date]);
         console.log(res);
         return res;
