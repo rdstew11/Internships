@@ -20,3 +20,7 @@ CREATE TABLE postings (
     external_link TEXT,
     PRIMARY KEY ("id")
 );
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON accounts to rdstew;
+GRANT SELECT, INSERT, DELETE, UPDATE ON postings to rdstew;
+GRANT USAGE ON postings_id_seq to rdstew;

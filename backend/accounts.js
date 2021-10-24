@@ -1,11 +1,15 @@
+module.exports = {
+    addAccount,
+    validateAccount
+}
 
-
-export async function addAccount(db, q){
+async function addAccount(pool, q){
     try{
         const un = q.username;
         const pw = q.password;
         const at = q.account_type;
-        const res = await db.query(`INSERT INTO accounts (username, password, account_type) VALUES ('${un}', '${pw}', '${at}');`);
+        const template = "INSERT INTO accounts (username, password, account_type) VALUES ($1, $2, $3);";
+        const res = await pool.query(template, [un, pw, at]);
         console.log(res);
         return res;
     }catch(err){
@@ -14,9 +18,10 @@ export async function addAccount(db, q){
     }
 }
 
-export async function validateAccount(db, un, pw){
+async function validateAccount(pool, un, pw){
     try{
-        const res = await db.query(`SELECT account_type FROM accounts HWERE (username = ${un} AND password = ${pw});`);
+        const template = "SELECT account_type FROM accounts WHERE (username = $1, AND password = $2);";
+        const res = await pool.query(template, [un, pw]);
         console.log(res);
         return res;
     }catch(err){

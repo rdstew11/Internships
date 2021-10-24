@@ -1,26 +1,26 @@
 const express = require('express');
-const postings = require('./postings');
-const accounts = require('./accounts');
-const { Client } = require('pg');
+const postings = require('./postings.js');
+const accounts = require('./accounts.js');
+const Pool = require('pg').Pool;
 const app = express();
 const port = 8080;
 
-const db = new Client({
+const pool = new Pool({
     user: 'rdstew',
     host: 'localhost',
     database: 'internships',
     password: 'password',
-    port: 8080,
+    port: 5432,
 });
 
-db.connect();
+pool.connect();
 
 app.get('/', (req, res)=>{
     res.send('hello');
 });
 
-app.get('/postings', (req, res) => {
-    const posts = await postings.getPosts(db);
+app.get('/postings', async (req, res) => {
+    const posts = await postings.getPosts(pool);
     res.send(posts);
 });
 
