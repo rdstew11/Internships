@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS accounts ;
+DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
     username TEXT NOT NULL,
     password TEXT NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE accounts (
 
 DROP TABLE IF EXISTS postings ;
 CREATE TABLE postings (
-    id INTEGER NOT NULL,
+    id SERIAL NOT NULL,
     title TEXT NOT NULL,
     company_name TEXT NOT NULL,
     city TEXT NOT NULL,
