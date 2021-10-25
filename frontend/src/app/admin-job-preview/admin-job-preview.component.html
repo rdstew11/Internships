@@ -1,0 +1,87 @@
+
+<!-- Job Card-->
+<div class="container" id='jobListing'>
+    <div class="card-header">
+        <div class='row text-left'>
+            <div class='col-6 p-0'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+job.id' aria-expanded='false'>
+                    <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
+                </button>                    
+            </div>
+            <div class='col text-right'>
+                <h6>{{job.city}}, {{job.state}}</h6>
+                <div> Submitted: {{job.start_date | date:'shortDate'}}</div> 
+            </div>
+        </div>
+            
+        
+    </div>
+    <div [id]='"collapse" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+        <div class="card-body">
+            <h5 class="card-title"><b>Description</b></h5>
+            <p class="card-text">{{job.description}}</p> 
+            <h5><b>Contact</b></h5>
+            <a class='my-0' *ngIf='job.external_link' [href]='job.external_link'>{{job.external_link}}</a>
+            <p class='my-0'>{{job.email}}</p>
+            <p class='my-0' *ngIf='job.phone_number'>{{job.phone_number}}</p>
+            <div>
+                <br>
+                
+                <div class='text-center'>
+                    <span class='mx-3'>
+                        <button class='btn btn-danger' type='button'
+                        data-toggle='modal' [attr.data-target]='"#deny-modal" + job.id'>
+                            Deny
+                        </button>
+                    </span>
+                    <span class='mx-3'>
+                        <button class='btn btn-success' type='button'
+                        data-toggle='modal' [attr.data-target]='"#approve-modal" + job.id'>
+                            Approve
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Approval Confirmation Modal-->
+<div class="modal fade text-center" [id]='"approve-modal" + job.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Approve "{{job.title}} &mdash; {{job.company_name}}"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-success' (onClick)='approve()'>Confirm Approval</button></span>
+            </div>
+        </div>
+  </div>
+</div>
+
+<div class="modal fade text-center" [id]='"deny-modal" + job.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Deny "{{job.title}} &mdash; {{job.company_name}}"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <p>This action will permanently delete the job.</p>
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-danger' (onClick)='deny()'>Confirm Denial</button></span>
+            </div>
+        </div>
+  </div>
+</div>

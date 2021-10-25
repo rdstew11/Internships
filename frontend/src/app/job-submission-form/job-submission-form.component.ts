@@ -11,12 +11,13 @@ import { DatabaseService } from '../database.service';
 export class JobSubmissionFormComponent {
 
   submissionDetails: JobPosting = {
+    id: -1,
     title: "",
     company_name: "",
     city: "",
     state: "",
-    end_date: new Date(),
-    description: ""
+    description: "",
+    email: ""
 
 }
 
@@ -31,7 +32,9 @@ export class JobSubmissionFormComponent {
    * Uses backend service to submit POST request to backend service
    */
   onSubmit(){
-    this.backend.addJob(this.submissionDetails);
+    //this.backend.addJob(this.submissionDetails);
+    console.log(this.submissionDetails.end_date);
+    //NEED TO IMPLEMENT ROUTING DEPENDENT ON RESPONSE
   }
 
 }
