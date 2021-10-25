@@ -1,6 +1,6 @@
 module.exports = {
     addPost,
-    getPosts,
+    getApprovedPosts,
     removePost,
     getUnapprovedPosts,
     approvePost,
@@ -16,8 +16,11 @@ async function addPost(pool, q){
         const description = q.description;
         const start_date = q.start_date;
         const end_date = q.end_date;
-        const template = "INSERT INTO postings (title, company_name, city, state, description, start_date, end_date) VALUES ($1, $2, $3, $4, $5, $6, $7);";
-        const res = await pool.query(template, [title, company_name, city, state, description, start_date, end_date]);
+        const email = q.email;
+        const phone_number = q.phone_number;
+        const external_link = q.external_link;
+        const template = "INSERT INTO postings (title, company_name, city, state, description, start_date, end_date, email, phone_number, external_link) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
+        const res = await pool.query(template, [title, company_name, city, state, description, start_date, end_date, email, phone_number, external_link]);
         console.log(res);
         return res;
     }catch(err){
@@ -26,9 +29,9 @@ async function addPost(pool, q){
     }
 }
 
-async function getPosts(pool){
+async function getApprovedPosts(pool){
     try{
-        const res = await pool.query("SELECT * FROM postings;");
+        const res = await pool.query("SELECT * FROM postings WHERE approved = TRUE;");
         console.log(res.rows)
         return res.rows;
     }catch(err){
@@ -40,8 +43,7 @@ async function getPosts(pool){
 async function removePost(pool, date){
     try{
         const template = "DELETE FROM postings WHERE end_date = $1;";
-        const res = pool.query(template, [date]);
-        console.log(res);
+        const res = await pool.query(template, [date]);
         return res;
     }catch(err){
         console.log(err.stack);
@@ -51,8 +53,7 @@ async function removePost(pool, date){
 
 async function getUnapprovedPosts(pool){
     try{
-        const res = pool.query("SELECT * FROM postings WHERE approved = FALSE;");
-        console.log(res.rows);
+        const res = await pool.query("SELECT * FROM postings WHERE approved = FALSE;");
         return res.rows;
     }catch(err){
         console.log(err.stack);
@@ -63,7 +64,7 @@ async function getUnapprovedPosts(pool){
 async function approvePost(pool, id){
     try{
         const template = "UPDATE postings SET approved = TRUE WHERE id = $1;";
-        const res = pool.query(template, [id]);
+        const res = await pool.query(template, [id]);
         console.log(res);
         return res;
     }catch(err){
@@ -75,7 +76,7 @@ async function approvePost(pool, id){
 async function denyPost(pool, id){
     try{
         const template = "DELETE FROM postings WHERE id = $1;";
-        const res = pool.query(template, [id]);
+        const res = await pool.query(template, [id]);
         console.log(res);
         return res;
     }catch(err){

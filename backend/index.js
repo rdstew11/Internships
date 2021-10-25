@@ -32,19 +32,56 @@ app.get('/', (req, res)=>{
     res.send('hello');
 });
 
-app.get('/postings', async (req, res) => {
-    const posts = await postings.getPosts(pool);
-    res.send(posts);
+/**
+ * Get unapproved postings
+ */
+app.get('/unapproved', async (req, res) =>{
+    console.log('GET request on /unapproved');
+    const response = await postings.getUnapprovedPosts(pool);
+    res.status(200).send(response);
 });
 
-//acounts DB
-app.get('/accounts', (req,res) =>{
-    const username = req.query.username;
-    res.send(username);
+
+app.get('/postings', async(req, res) =>{
+    console.log('GET request on /postings');
+    const response = await postings.getApprovedPosts(pool);
+    res.status(200).send(response);
+});
+
+app.delete('/postings', async(req, res) =>{
+    console.log('DELETE request on /postings')
+    await postings.denyPost(pool, req.body.id);
+    res.status(200);
+});
+
+app.put('/approve', async (req, res) =>{
+    console.log('PUT request on /approve');
+    //console.log(req.body.id);
+    await postings.approvePost(pool, req.body.id);
+    res.status(200);
+});
+
+
+/**
+ * Create a new posting
+ */
+app.post('/postings', async (req, res) =>{
+    console.log('POST request on /postings');
+    console.log(req.body);
+    const response = await postings.addPost(pool, req.body);
+    if(response.rowCount > 0){
+        res.sendStatus(201);
+    }
+    else{
+        res.sendStatus(404);
+    }
+
 });
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');
-
+/**
+ * User authentication
+ */
 app.post('/login', async (req,res)=>{
     console.log("POST request on /login");
     const username = req.body.username;

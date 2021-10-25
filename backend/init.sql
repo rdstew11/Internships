@@ -14,6 +14,8 @@ CREATE TABLE postings (
     state TEXT NOT NULL,
     description TEXT NOT NULL,
     start_date DATE,
+    email TEXT NOT NULL,
+    phone_number TEXT,
     end_date DATE NOT NULL,
     approved BOOLEAN DEFAULT FALSE,
     alumni BOOLEAN DEFAULT FALSE,
@@ -30,7 +32,45 @@ CREATE TABLE company (
 	approved BOOLEAN DEFAULT FALSE
 );
 
-GRANT SELECT, INSERT, DELETE, UPDATE ON accounts to rdstew;
-GRANT SELECT, INSERT, DELETE, UPDATE ON postings to rdstew;
-GRANT USAGE ON postings_id_seq to rdstew;
+INSERT INTO accounts (username, password, account_type)
+VALUES ('admin','admin','admin');
 
+INSERT INTO postings (title, company_name, city, state, description, email, start_date, end_date)
+VALUES 
+('Software Engineer', 'Booze Allen Hamilton', 'Arlington', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@bah.com', '2021-10-20', '2022-01-01'),
+ ('Software Developer', 'Revature', 'Richmond', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@revature.com', '2021-10-20', '2021-12-01'),
+ ('Software Development Engineer', 'Amazon', 'Reston', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@amazon.com', '2021-10-20', '2022-01-01'),
+  ('Dev Ops Engineer', 'Facebook', 'Reston', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@facebook.com', '2021-10-20', '2022-01-01'),
+  ('Software Engineer Intern', 'Google', 'Fairfax', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@google.com', '2021-10-20', '2022-01-01'),
+  ('Software Engineer', 'Google', 'Fairfax', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@google.com', '2021-10-20', '2022-01-015'),
+  ('Software Developer', 'Leidos', 'Charlottesville', 'Virginia',
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'hiring@leidos.com', '2021-10-20', '2022-02-01');
+ 
+  
