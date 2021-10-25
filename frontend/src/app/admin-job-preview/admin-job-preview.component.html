@@ -60,7 +60,7 @@ aria-labelledby="modal-title" aria-hidden="true">
 
             <div class="modal-body">
                 <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
-                <span class='mx-3'><button class='btn btn-success' (onClick)='approve()'>Confirm Approval</button></span>
+                <span class='mx-3'><button class='btn btn-success' data-dismiss='modal' (click)='approve()'>Confirm Approval</button></span>
             </div>
         </div>
   </div>
@@ -80,7 +80,7 @@ aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-body">
                 <p>This action will permanently delete the job.</p>
                 <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
-                <span class='mx-3'><button class='btn btn-danger' (onClick)='deny()'>Confirm Denial</button></span>
+                <span class='mx-3'><button class='btn btn-danger' data-dismiss='modal' (click)='deny()'>Confirm Denial</button></span>
             </div>
         </div>
   </div>

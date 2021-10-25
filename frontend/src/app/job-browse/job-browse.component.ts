@@ -9,44 +9,12 @@ import { JobPosting } from '../jobPosting'
 })
 export class JobBrowseComponent implements OnInit {
 
-  jobs: JobPosting[] = [{
-    id: 1,
-    title: 'Software Engineer',
-    company_name: 'Google',
-    city: 'Reston',
-    state: 'VA',
-    description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-    start_date: new Date(),
-    email: 'rdstew11@gmail.com'
-  },
-  {
-    id: 2,
-    title: 'Software Engineer',
-    company_name: 'Google',
-    city: 'Reston',
-    state: 'VA',
-    description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-    start_date: new Date(),
-    email: 'rdstew11@gmail.com'
-  },
-  {
-    id: 3,
-    title: 'Software Engineer',
-    company_name: 'Google',
-    city: 'Reston',
-    state: 'VA',
-    description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-    start_date: new Date(),
-    email: 'rdstew11@gmail.com'
-  },
-
-
-]
+  jobs: JobPosting[] = []
 
   constructor(private backend: DatabaseService) { }
 
   ngOnInit(): void {
-   // this.jobs = this.backend.getAllJobs();
+    this.jobs = this.backend.getApprovedJobs();
   }
 
 }

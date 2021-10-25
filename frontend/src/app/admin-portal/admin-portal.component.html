@@ -1,8 +1,9 @@
-<div class='container bg-white mt-5 p-5'>
+<div class='container bg-white mt-5 p-5 rounded'>
     <h1 class='text-center mx-auto'><b>Admin Portal</b></h1>
     <ul style='list-style: none;' class='p-0 bg-white'>
         <li *ngFor='let job of jobs'>
-            <admin-job-preview [id]='job.id' [job]='job'></admin-job-preview>
+            <admin-job-preview [id]='job.id' [job]='job' (removeItemEvent)='removeItem($event)'></admin-job-preview>
         </li>
     </ul>
+    <p *ngIf='jobs.length == 0'>There are no jobs waiting approval...</p>
 </div>

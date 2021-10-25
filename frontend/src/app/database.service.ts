@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { Observable, throwError,} from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, shareReplay, retry} from 'rxjs/operators';
 
 import { JobPosting } from './jobPosting';
 
@@ -10,14 +11,15 @@ import { JobPosting } from './jobPosting';
 })
 export class DatabaseService {
 
-  acccountsUrl = '127.0.0.1:8080/accounts';
-  postingsUrl = '127.0.0.1:8080/postings'
+  acccountsUrl = 'http://127.0.0.1:8080/accounts';
+  postingsUrl = 'http://127.0.0.1:8080/postings';
+  url='http://127.0.0.1:8080';
 
 
   /**
    * @param http angular API to make http requests
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
 
@@ -28,28 +30,49 @@ export class DatabaseService {
    * makes a POST request to add given job to backend
    * @param jobDetails <JobPosting> posting to be added to database
    */
-  public addJob(jobDetails: JobPosting): void{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }
-    this.http.post(this.postingsUrl, jobDetails, httpOptions)
+  public addJob(jobDetails: JobPosting): any{
+    console.log('POST request to ' + this.postingsUrl);
+    const response:any = null;
+     this.http.post<any>(this.postingsUrl, jobDetails)
       .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
+        catchError(this.handleError), shareReplay(1)
+      ).subscribe(res => response);
+
+    console.log(response);
+    this.router.navigate(['/browse']);
+    
+  }
+
+  public getUnapprovedJobs(): JobPosting[]{
+    let response: JobPosting[] = [];
+    this.http.get<any>(this.url+'/unapproved').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        response.push(el);
+      });
+    });
+    return response;
   }
 
 
 
-  public getAllJobs() :JobPosting[]{
+  public getApprovedJobs() :JobPosting[]{
+    let response :JobPosting[] = [];
+    this.http.get<any>(this.url+'/postings').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        response.push(el);
+      });
+    });
+    return response;
+  }
 
-    let res :JobPosting[] = [];
 
-    //TO DO GET REQUEST
+  public approveJob(job: JobPosting) :void{
+    console.log('put');
+    this.http.put<any>(this.url + '/approve', job).pipe(catchError(this.handleError)).subscribe();
+  }
 
-    return res;
+  public denyJob(id: number) :void{
+    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).pipe(catchError(this.handleError)).subscribe();
   }
 
   /**

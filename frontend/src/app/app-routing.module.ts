@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'submit', component: JobSubmissionFormComponent},
   {path: 'admin', component: AdminPortalComponent},
   {path: 'browse', component: JobBrowseComponent},
+  {path: '', component: JobBrowseComponent}
 ];
 
 @NgModule({

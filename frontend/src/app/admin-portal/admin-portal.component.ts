@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobPosting } from '../jobPosting';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-admin-portal',
@@ -8,53 +9,20 @@ import { JobPosting } from '../jobPosting';
 })
 export class AdminPortalComponent implements OnInit {
 
-  jobs: JobPosting[] = [
-    {
-      id: 1,
-      title: 'Software Engineer',
-      company_name: 'Google',
-      city: 'Reston',
-      state: 'VA',
-      description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-      start_date: new Date(),
-      email: 'rdstew11@gmail.com',
-      phone_number: "5408485851",
-      external_link: "https://google.com"
-    },
-    {
-      id:2,
-      title: 'Software Engineer',
-      company_name: 'Google',
-      city: 'Reston',
-      state: 'VA',
-      description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-      start_date: new Date(),
-      email: 'rdstew11@gmail.com'
-    },
-    {
-      id: 3,
-      title: 'Software Engineer',
-      company_name: 'Google',
-      city: 'Reston',
-      state: 'VA',
-      description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-      start_date: new Date(),
-      email: 'rdstew11@gmail.com'
-    },
-    {
-      id: 4,
-      title: 'Software Engineer',
-      company_name: 'Google',
-      city: 'Reston',
-      state: 'VA',
-      description: 'Lorem ipsum dolor sit amet, voluptua facilisis ad eam, ex ius libris volumus democritum. Ea tation discere vim, ignota honestatis has eu. Cum elit nulla petentium cu. Maiorum eligendi ea qui. Singulis intellegebat ea vim, consul iudicabit id ius. Stet reque malis no qui, tota facilis dolores in quo.',
-      start_date: new Date(),
-      email: 'rdstew11@gmail.com'
-    },
-  ]
-  constructor() { }
+  jobs: JobPosting[] = []
+  constructor(private backend: DatabaseService) { }
 
   ngOnInit(): void {
+    this.jobs = this.backend.getUnapprovedJobs();
+  }
+
+  removeItem(id: number){
+    for(let i = 0; i < this.jobs.length; i++){
+      if(this.jobs[i].id == id){
+        this.jobs.splice(i,1);
+        break;
+      }
+    }
   }
 
 }

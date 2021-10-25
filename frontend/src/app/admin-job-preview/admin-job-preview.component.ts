@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 import { DatabaseService } from '../database.service';
 import { JobPosting } from '../jobPosting';
@@ -12,7 +12,7 @@ export class AdminJobPreviewComponent implements OnInit {
 
 
   @Input() job!: JobPosting;
-
+  @Output() removeItemEvent = new EventEmitter<number>();
 
   constructor(private backend: DatabaseService) { }
 
@@ -20,11 +20,13 @@ export class AdminJobPreviewComponent implements OnInit {
   }
 
   approve(): void {
-
+    this.backend.approveJob(this.job);
+    this.removeItemEvent.emit(this.job.id);
   }
 
   deny(): void {
-
+    this.backend.denyJob(this.job.id);
+    this.removeItemEvent.emit(this.job.id);
   }
 
 }
