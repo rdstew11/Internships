@@ -1,0 +1,83 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError,shareReplay } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { LoginCredentials } from './loginCredentials';
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  loginUrl = 'http://127.0.0.1:8080/login';
+  loggedIn: Boolean = false;
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  /**
+ * makes POST request to validate given credentials in the backend 
+ * Request returns a JWT to be stored locally to grant authorization
+ * Validation does not occur here, will occur in the backend
+ * 
+ * @param credentials  <LoginCrendentials> credentials to be validated
+ */
+  public login(credentials: LoginCredentials){
+    //this POST request sends username and password to backend to be validated against DB
+    this.http.post<any>(this.loginUrl, credentials).pipe(catchError(this.handleLoginError),shareReplay(1)).subscribe(res => this.setSession(res));
+  }
+
+
+  /**
+   * Puts JWT in browser localstore
+   * @param authResult JSON from backend received through POST request
+   */
+  private setSession(authResult: any){
+    const expiresAt = new Date();
+    expiresAt.setSeconds(expiresAt.getSeconds() + authResult.expiration);
+  
+    localStorage.setItem('id_token', authResult.jwt)
+    localStorage.setItem('expiration', JSON.stringify(expiresAt.valueOf()));
+    
+    this.router.navigate(['/admin']);
+    this.loggedIn = true;
+  }
+
+  /**
+   * Removes token from browser storage
+   */
+  public logout(){
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expiration');
+  }
+
+  public isLoggedIn():Boolean{
+    return(Date.now() < parseInt(localStorage.getItem('expiration')?? "0"));
+  }
+
+  /**
+   * Basic error handling on request to backend server
+   * @param error Error coming from the backend
+   * @returns Error message to the user
+   */
+  private handleLoginError(error: HttpErrorResponse){
+    if(error.status == 0){
+      //client side or network error
+      console.error('An error occured: ', error.error);
+    }
+    else if(error.status == 401){
+      //Invalid login
+      console.error('Unauthorized Login');
+    }
+    else{
+      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+    }
+
+    return throwError('Something went wrong, try again later.');
+  }
+
+
+}

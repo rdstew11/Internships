@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
-import { LoginCredentials } from './loginCredentials';
 import { JobPosting } from './jobPosting';
 
 @Injectable({
@@ -20,29 +19,7 @@ export class DatabaseService {
    */
   constructor(private http: HttpClient) { }
 
-  /**
-   * makes GET request to validate given credentials in the backend 
-   * Validation does not occur here, will occur in the backend
-   * @param credentials  <LoginCrendentials> credentials to be validated
-   * @returns  <LoginCredentials> if valid | null if invalid
-   */
-  public getValidation(credentials: LoginCredentials): LoginCredentials{
-    const username = credentials.username;
-    const password = credentials.password;
-    let res: LoginCredentials = {username: "", password: "", account_type:""};
 
-    const options = username ? { params: new HttpParams().set('username', username).set('password', password) } : {};
-
-    //this GET request sends username and password to backend to be validated against DB
-    this.http.get<LoginCredentials>(this.acccountsUrl, options)
-      .pipe(
-        retry(3), //retry failed requests 3 times
-        catchError(this.handleError)  //then handle error
-      ).subscribe((data: LoginCredentials) => res = { ...data });
-    
-    
-    return res;
-  }
 
 
   //Honestly not sure if this works (the headers?) and need to wait until 
@@ -64,6 +41,16 @@ export class DatabaseService {
       );
   }
 
+
+
+  public getAllJobs() :JobPosting[]{
+
+    let res :JobPosting[] = [];
+
+    //TO DO GET REQUEST
+
+    return res;
+  }
 
   /**
    * Basic error handling on request to backend server
