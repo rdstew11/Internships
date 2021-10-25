@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS accounts ;
+DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
     username TEXT NOT NULL,
     password TEXT NOT NULL,
@@ -7,6 +7,7 @@ CREATE TABLE accounts (
 
 DROP TABLE IF EXISTS postings ;
 CREATE TABLE postings (
+    id SERIAL NOT NULL,
     title TEXT NOT NULL,
     company_name TEXT NOT NULL,
     city TEXT NOT NULL,
@@ -16,5 +17,10 @@ CREATE TABLE postings (
     end_date DATE NOT NULL,
     approved BOOLEAN DEFAULT FALSE,
     alumni BOOLEAN DEFAULT FALSE,
-    external_link TEXT
+    external_link TEXT,
+    PRIMARY KEY ("id")
 );
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON accounts to rdstew;
+GRANT SELECT, INSERT, DELETE, UPDATE ON postings to rdstew;
+GRANT USAGE ON postings_id_seq to rdstew;

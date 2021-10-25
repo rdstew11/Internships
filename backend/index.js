@@ -4,6 +4,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const  { Pool } = require('pg');
+const postings = require('./postings.js');
+const accounts = require('./accounts.js');
 const app = express();
 const port = 8080;
 const fs = require('fs');
@@ -15,7 +17,6 @@ app.use(express.urlencoded({
 }));
 
 
-
 const dblogin = {
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
@@ -23,14 +24,17 @@ const dblogin = {
     host: process.env.HOST,
 }
 
-console.log(dblogin);
-
 const pool = new Pool(dblogin);
 
 
 
 app.get('/', (req, res)=>{
     res.send('hello');
+});
+
+app.get('/postings', async (req, res) => {
+    const posts = await postings.getPosts(pool);
+    res.send(posts);
 });
 
 //acounts DB
