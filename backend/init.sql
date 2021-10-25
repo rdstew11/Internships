@@ -20,7 +20,17 @@ CREATE TABLE postings (
     external_link TEXT,
     PRIMARY KEY ("id")
 );
+DROP TABLE IF EXISTS company ;
+CREATE TABLE company (
+	name TEXT NOT NULL,
+	address TEXT NOT NULL,
+	description TEXT NOT NULL,
+	website_link TEXT,
+	posting_id TEXT NOT NULL,
+	approved BOOLEAN DEFAULT FALSE
+);
 
 GRANT SELECT, INSERT, DELETE, UPDATE ON accounts to rdstew;
 GRANT SELECT, INSERT, DELETE, UPDATE ON postings to rdstew;
 GRANT USAGE ON postings_id_seq to rdstew;
+
