@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { JobSubmissionFormComponent } from './job-submission-form/job-submission-form.component';
 import { JobPreviewComponent } from './job-preview/job-preview.component';
 import { JobBrowseComponent } from './job-browse/job-browse.component';
-import { JobPostingComponent } from './job-posting/job-posting.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { IndexComponent } from './index/index.component';
@@ -26,7 +25,6 @@ import { AdminJobModalComponent } from './admin-job-modal/admin-job-modal.compon
     JobSubmissionFormComponent,
     JobPreviewComponent,
     JobBrowseComponent,
-    JobPostingComponent,
     NavbarComponent,
     LoginPageComponent,
     IndexComponent,

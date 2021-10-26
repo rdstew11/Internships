@@ -2,13 +2,13 @@
 <!-- Job Card-->
 <div class="container" id='jobListing'>
     <div class="card-header">
-        <div class='row text-left'>
-            <div class='col-6 p-0'>
+        <div class='row '>
+            <div class='col-6 p-0 text-left'>
                 <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+job.id' aria-expanded='false'>
                     <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
                 </button>                    
             </div>
-            <div class='col text-right'>
+            <div class='col text-end'>
                 <h6>{{job.city}}, {{job.state}}</h6>
                 <div> Submitted: {{job.start_date | date:'shortDate'}}</div> 
             </div>
