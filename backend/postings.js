@@ -1,10 +1,23 @@
 module.exports = {
     addPost,
+    searchPosts,
     getApprovedPosts,
     removePost,
     getUnapprovedPosts,
     approvePost,
     denyPost
+}
+
+async function searchPosts(pool, q){
+    try{
+        const template = "SELECT * FROM postings WHERE to_tsvector(title || ' ' || company_name || ' ' || description) @@ to_tsquery('$1');";
+        const res = await pool.query(template, [q]);
+        console.log(res);
+        return res.rows;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
 }
 
 async function addPost(pool, q){
