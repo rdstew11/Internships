@@ -10,9 +10,9 @@ module.exports = {
 
 async function searchPosts(pool, q){
     try{
-        const template = "SELECT * FROM postings WHERE to_tsvector(title || ' ' || company_name || ' ' || description) @@ to_tsquery('$1');";
-        const res = await pool.query(template, [q]);
-        console.log(res);
+        const template = `SELECT * FROM postings WHERE title || ' ' || company_name || ' ' || description ILIKE '%${q}%';`;
+        const res = await pool.query(template);
+        console.log(res.rows);
         return res.rows;
     }catch(err){
         console.log(err.stack);
