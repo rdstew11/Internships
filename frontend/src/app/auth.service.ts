@@ -4,7 +4,7 @@ import { catchError,shareReplay } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { LoginCredentials } from './loginCredentials';
+import { LoginCredentials } from './interfaces';
 
 
 

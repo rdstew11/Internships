@@ -6,6 +6,7 @@ require('dotenv').config();
 const  { Pool } = require('pg');
 const postings = require('./postings.js');
 const accounts = require('./accounts.js');
+const companies = require('./companies');
 const app = express();
 const port = 8080;
 const fs = require('fs');
@@ -76,6 +77,19 @@ app.post('/postings', async (req, res) =>{
         res.sendStatus(404);
     }
 
+});
+
+
+app.get('/company', async (req, res) => {
+    const param = req.query.q;
+    let response;
+    if(param == 'approved'){
+        response = await companies.getApprovedCompanies(pool);
+    }
+    else if(param == 'unapproved'){
+        response = await companies.getUnapprovedCompanies(pool);
+    }
+    res.status(200).send(response.rows);
 });
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');

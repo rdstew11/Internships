@@ -4,7 +4,7 @@ import { Observable, throwError,} from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, shareReplay, retry} from 'rxjs/operators';
 
-import { JobPosting } from './jobPosting';
+import { JobPosting, Company } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -67,12 +67,40 @@ export class DatabaseService {
 
 
   public approveJob(job: JobPosting) :void{
-    console.log('put');
     this.http.put<any>(this.url + '/approve', job).pipe(catchError(this.handleError)).subscribe();
   }
 
   public denyJob(id: number) :void{
     this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).pipe(catchError(this.handleError)).subscribe();
+  }
+
+
+  public getApprovedCompanies() : Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', 'approved')};
+    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+      res.forEach((el : Company) => {
+        companies.push(el);
+      }));
+    return companies;
+  }
+
+  public getUnapprovedCompanies() : Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', 'unapproved')};
+    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+      res.forEach((el : Company) => {
+        companies.push(el);
+      }));
+    return companies;    
+  }
+
+  public approveCompany(id: number) : void {
+    this.http.put<any>(this.url + '/company', id).pipe(catchError(this.handleError)).subscribe();
+  }
+
+  public denyCompany(id: number) : void {
+    this.http.put<any>(this.url + '/company', {body: {'id': id}}).pipe(catchError(this.handleError)).subscribe();
   }
 
   /**
@@ -84,6 +112,9 @@ export class DatabaseService {
     if(error.status == 0){
       //client side or network error
       console.error('An error occured: ', error.error);
+    }
+    else if(error.status == 200){
+
     }
     else{
       console.error(`Backend returned code ${error.status}, body was: `, error.error);

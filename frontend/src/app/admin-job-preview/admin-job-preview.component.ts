@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 import { DatabaseService } from '../database.service';
-import { JobPosting } from '../jobPosting';
+import { JobPosting } from '../interfaces';
 
 @Component({
   selector: 'admin-job-preview',

@@ -14,7 +14,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { IndexComponent } from './index/index.component';
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
 import { AdminJobPreviewComponent } from './admin-job-preview/admin-job-preview.component';
-import { AdminJobModalComponent } from './admin-job-modal/admin-job-modal.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { CompanyBrowseComponent } from './company-browse/company-browse.component';
+import { AdminCompanyProfileComponent } from './admin-company-profile/admin-company-profile.component';
+import { CompanySubmissionFormComponent } from './company-submission-form/company-submission-form.component';
 
 
 
@@ -30,7 +33,10 @@ import { AdminJobModalComponent } from './admin-job-modal/admin-job-modal.compon
     IndexComponent,
     AdminPortalComponent,
     AdminJobPreviewComponent,
-    AdminJobModalComponent
+    CompanyProfileComponent,
+    CompanyBrowseComponent,
+    AdminCompanyProfileComponent,
+    CompanySubmissionFormComponent
   ],
   imports: [
     BrowserModule,

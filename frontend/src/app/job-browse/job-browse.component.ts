@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
-import { JobPosting } from '../jobPosting'
+import { JobPosting } from '../interfaces'
 
 @Component({
   selector: 'job-browse',

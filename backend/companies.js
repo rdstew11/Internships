@@ -2,7 +2,9 @@ module.exports = {
     searchCompanies,
     addCompany,
     approveCompany,
-    denyCompany
+    denyCompany,
+    getApprovedCompanies,
+    getUnapprovedCompanies
 }
 
 async function addCompany(pool, q){
@@ -19,6 +21,30 @@ async function addCompany(pool, q){
         return res;
     }catch(err){
         console.log(err.stack);
+        return err;
+    }
+}
+
+async function getApprovedCompanies(pool){
+    try{
+        const template = 'SELECT * FROM company WHERE approved = TRUE;';
+        const res = await pool.query(template,[]);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack)
+        return err;
+    }
+}
+
+async function getUnapprovedCompanies(pool){
+    try{
+        const template = 'SELECT * FROM company WHERE approved = FALSE;';
+        const res = await pool.query(template,[]);
+        console.log(res);
+        return res;
+    }catch(err){
+        console.log(err.stack)
         return err;
     }
 }
