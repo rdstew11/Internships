@@ -10,6 +10,7 @@ import { JobPosting } from '../interfaces'
 export class JobBrowseComponent implements OnInit {
 
   jobs: JobPosting[] = []
+  keyword: string = "";
 
   constructor(private backend: DatabaseService) { }
 
@@ -17,4 +18,7 @@ export class JobBrowseComponent implements OnInit {
     this.jobs = this.backend.getApprovedJobs();
   }
 
+  onSubmit(): void {
+    this.jobs = this.backend.searchPostings(this.keyword);
+  }
 }

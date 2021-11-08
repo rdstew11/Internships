@@ -11,11 +11,16 @@ import { Company } from '../interfaces';
 export class CompanyBrowseComponent implements OnInit {
 
   companies : Company[] = [];
+  keyword: string = "";
 
   constructor(private backend : DatabaseService) { }
 
   ngOnInit(): void {
     this.companies = this.backend.getApprovedCompanies();
+  }
+
+  onSubmit(): void{
+    this.companies = this.backend.searchCompanies(this.keyword)
   }
 
 }

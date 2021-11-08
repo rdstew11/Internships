@@ -117,6 +117,29 @@ export class DatabaseService {
     return jobs;
   }
 
+  public searchPostings(keyword: string): JobPosting[] {
+    let jobs : JobPosting[] = [];
+    const options = {params: new HttpParams().set('q', keyword)};
+    this.http.get<any>(this.url+'/search-posts', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        jobs.push(el);
+      });
+    });
+
+    return jobs;
+  }
+
+  public searchCompanies(keyword: string): Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', keyword)};
+    this.http.get<any>(this.url+'/search-companies', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: Company) => {
+        companies.push(el);
+      });
+    });
+    return companies;
+  }
+
   /**
    * Basic error handling on request to backend server
    * @param error Error coming from the backend
