@@ -7,14 +7,15 @@ module.exports = {
 
 async function addCompany(pool, q){
     try{
+        const email = q.email;
         const name = q.name;
         const address = q.address;
         const description = q.description;
         const website_link = q.website_link;
         const posting_id = q.posting_id;
         const approved = false;
-        const template = "INSERT INTO company (name, address, description, website_link, posting_id, approved) VALUES ($1, $2, $3, $4, $5, $6);";
-        const res = await pool.query(template, [name, address, description, website_link, posting_id, approved]);
+        const template = "INSERT INTO company (email, name, address, description, website_link, posting_id, approved) VALUES ($1, $2, $3, $4, $5, $6, $7);";
+        const res = await pool.query(template, [email, name, address, description, website_link, posting_id, approved]);
         console.log(res);
         return res;
     }catch(err){
