@@ -6,6 +6,8 @@ require('dotenv').config();
 const  { Pool } = require('pg');
 const postings = require('./postings.js');
 const accounts = require('./accounts.js');
+const students = require('./students.js');
+const companies = require('./companies.js');
 const app = express();
 const port = 8080;
 const fs = require('fs');
@@ -27,7 +29,6 @@ const dblogin = {
 const pool = new Pool(dblogin);
 
 
-
 app.get('/', (req, res)=>{
     res.send('hello');
 });
@@ -35,32 +36,39 @@ app.get('/', (req, res)=>{
 /**
  * Get unapproved postings
  */
-app.get('/unapproved', async (req, res) =>{
-    console.log('GET request on /unapproved');
+app.get('/unapprovedPostings', async (req, res) =>{
+    console.log('GET request on /unapprovedPostings');
     const response = await postings.getUnapprovedPosts(pool);
     res.status(200).send(response);
 });
 
-
+/**
+ * Get approved postings
+ */
 app.get('/postings', async(req, res) =>{
     console.log('GET request on /postings');
     const response = await postings.getApprovedPosts(pool);
     res.status(200).send(response);
 });
 
-app.delete('/postings', async(req, res) =>{
-    console.log('DELETE request on /postings')
-    await postings.denyPost(pool, req.body.id);
-    res.status(200);
-});
-
-app.put('/approve', async (req, res) =>{
-    console.log('PUT request on /approve');
+/**
+ * Aprove post
+ */
+app.put('/approvePost', async (req, res) =>{
+    console.log('PUT request on /approvePost');
     //console.log(req.body.id);
     await postings.approvePost(pool, req.body.id);
     res.status(200);
 });
 
+/**
+ * Deny post
+ */
+app.delete('/postings', async(req, res) =>{
+    console.log('DELETE request on /postings')
+    await postings.denyPost(pool, req.body.id);
+    res.status(200);
+});
 
 /**
  * Create a new posting
@@ -69,6 +77,58 @@ app.post('/postings', async (req, res) =>{
     console.log('POST request on /postings');
     console.log(req.body);
     const response = await postings.addPost(pool, req.body);
+    if(response.rowCount > 0){
+        res.sendStatus(201);
+    }
+    else{
+        res.sendStatus(404);
+    }
+
+});
+
+/**
+ * Get unapproved students
+ */
+ app.get('/unapprovedStudents', async (req, res) =>{
+    console.log('GET request on /unapprovedStudents');
+    const response = await students.getUnapprovedStudents(pool);
+    res.status(200).send(response);
+});
+
+/**
+ * Get approved students
+ */
+app.get('/students', async(req, res) =>{
+    console.log('GET request on /students');
+    const response = await students.getApprovedStudents(pool);
+    res.status(200).send(response);
+});
+
+/**
+ * Aprove student
+ */
+app.put('/approveStudent', async (req, res) =>{
+    console.log('PUT request on /approveStudent');
+    await students.approveStudent(pool, req.body.email);
+    res.status(200);
+});
+
+/**
+ * Deny student
+ */
+app.delete('/students', async(req, res) =>{
+    console.log('DELETE request on /students')
+    await students.denyStudent(pool, req.body.email);
+    res.status(200);
+});
+
+/**
+ * Create a new student 
+ */
+ app.post('/students', async (req, res) =>{
+    console.log('POST request on /students');
+    console.log(req.body);
+    const response = await students.addStudent(pool, req.body);
     if(response.rowCount > 0){
         res.sendStatus(201);
     }
