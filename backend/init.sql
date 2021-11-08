@@ -74,3 +74,18 @@ vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae sca
  'hiring@leidos.com', '2021-10-20', '2022-02-01');
  
   
+DROP TABLE IF EXISTS student ;
+CREATE TABLE student(
+	email TEXT NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	grad_date DATE NOT NULL,
+	resume_filename TEXT,
+	biography TEXT,
+	gpa FLOAT,
+	external_link TEXT,
+	gender TEXT,
+	ethnicity TEXT,
+	approved BOOLEAN DEFAULT FALSE
+);
+
