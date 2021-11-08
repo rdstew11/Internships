@@ -53,7 +53,6 @@ async function approveCompany(pool, name){
     try{
         const template = "UPDATE company SET approved = TRUE WHERE name = $1;";
         const res = await pool.query(template, [name]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack)
@@ -65,7 +64,6 @@ async function denyCompany(pool, name){
     try{
         const template = "DELETE FROM company WHERE name = $1;";
         const res = await pool.query(template, [name]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack);
@@ -77,7 +75,6 @@ async function searchCompanies(pool, q){
     try{
         const template = `SELECT * FROM company WHERE name ILIKE '%${q}%';`;
         const res = await pool.query(template);
-        console.log(res.rows);
         return res.rows;
     }catch(err){
         console.log(err.stack);

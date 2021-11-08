@@ -19,12 +19,12 @@ export class AdminCompanyProfileComponent implements OnInit {
   }
 
   approve(): void{
-    this.backend.approveCompany(this.company.id);
+    this.backend.approveCompany(this.company);
     this.removeItemEvent.emit(this.company.id);
   }
 
   deny(): void {
-    this.backend.denyCompany(this.company.id);
+    this.backend.denyCompany(this.company.name);
     this.removeItemEvent.emit(this.company.id);
   }
 

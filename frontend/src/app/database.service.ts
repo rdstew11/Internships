@@ -45,7 +45,8 @@ export class DatabaseService {
 
   public getUnapprovedJobs(): JobPosting[]{
     let response: JobPosting[] = [];
-    this.http.get<any>(this.url+'/unapproved').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    const options = {params: new HttpParams().set('q', 'unapproved')};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -57,7 +58,8 @@ export class DatabaseService {
 
   public getApprovedJobs() :JobPosting[]{
     let response :JobPosting[] = [];
-    this.http.get<any>(this.url+'/postings').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    const options = {params: new HttpParams().set('q', 'approved')};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -67,7 +69,7 @@ export class DatabaseService {
 
 
   public approveJob(job: JobPosting) :void{
-    this.http.put<any>(this.url + '/approve', job).pipe(catchError(this.handleError)).subscribe();
+    this.http.put<any>(this.url + '/postings', job).pipe(catchError(this.handleError)).subscribe();
   }
 
   public denyJob(id: number) :void{
@@ -95,12 +97,24 @@ export class DatabaseService {
     return companies;    
   }
 
-  public approveCompany(id: number) : void {
-    this.http.put<any>(this.url + '/company', id).pipe(catchError(this.handleError)).subscribe();
+  public approveCompany(company: Company) : void {
+    this.http.put<any>(this.url + '/company', company).pipe(catchError(this.handleError)).subscribe();
   }
 
-  public denyCompany(id: number) : void {
-    this.http.put<any>(this.url + '/company', {body: {'id': id}}).pipe(catchError(this.handleError)).subscribe();
+  public denyCompany(name: String) : void {
+    this.http.put<any>(this.url + '/company', {body: {'name': name}}).pipe(catchError(this.handleError)).subscribe();
+  }
+
+  public getCompanyPostings(company: Company) : JobPosting[] {
+    let jobs : JobPosting[] = [];
+    const options = {params: new HttpParams().set('q', company.name)};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        jobs.push(el);
+      });
+    });
+
+    return jobs;
   }
 
   /**

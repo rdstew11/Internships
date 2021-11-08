@@ -1,10 +1,10 @@
 
 <!-- Job Card-->
-<div class="container" id='jobListing'>
+<div class="container p-0" id='jobListing'>
     <div class="card-header">
         <div class='row '>
             <div class='col-6 p-0 text-left'>
-                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+job.id' aria-expanded='false'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-job"+job.id' aria-expanded='false'>
                     <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
                 </button>                    
             </div>
@@ -16,7 +16,7 @@
             
         
     </div>
-    <div [id]='"collapse" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+    <div [id]='"collapse-job" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
         <div class="card-body">
             <h5 class="card-title"><b>Description</b></h5>
             <p class="card-text">{{job.description}}</p> 
@@ -30,13 +30,13 @@
                 <div class='text-center'>
                     <span class='mx-3'>
                         <button class='btn btn-danger' type='button'
-                        data-toggle='modal' [attr.data-target]='"#deny-modal" + job.id'>
+                        data-toggle='modal' [attr.data-target]='"#deny-modal-job" + job.id'>
                             Deny
                         </button>
                     </span>
                     <span class='mx-3'>
                         <button class='btn btn-success' type='button'
-                        data-toggle='modal' [attr.data-target]='"#approve-modal" + job.id'>
+                        data-toggle='modal' [attr.data-target]='"#approve-modal-job" + job.id'>
                             Approve
                         </button>
                     </span>
@@ -47,7 +47,7 @@
 </div>
 
 <!--Approval Confirmation Modal-->
-<div class="modal fade text-center" [id]='"approve-modal" + job.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"approve-modal-job" + job.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -66,7 +66,7 @@ aria-labelledby="modal-title" aria-hidden="true">
   </div>
 </div>
 
-<div class="modal fade text-center" [id]='"deny-modal" + job.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"deny-modal-job" + job.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

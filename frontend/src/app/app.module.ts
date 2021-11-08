@@ -17,6 +17,7 @@ import { AdminJobPreviewComponent } from './admin-job-preview/admin-job-preview.
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { CompanyBrowseComponent } from './company-browse/company-browse.component';
 import { AdminCompanyProfileComponent } from './admin-company-profile/admin-company-profile.component';
+import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { CompanySubmissionFormComponent } from './company-submission-form/company-submission-form.component';
 
 
@@ -36,7 +37,8 @@ import { CompanySubmissionFormComponent } from './company-submission-form/compan
     CompanyProfileComponent,
     CompanyBrowseComponent,
     AdminCompanyProfileComponent,
-    CompanySubmissionFormComponent
+    CreateAccountFormComponent,
+    CompanySubmissionFormComponent,
   ],
   imports: [
     BrowserModule,

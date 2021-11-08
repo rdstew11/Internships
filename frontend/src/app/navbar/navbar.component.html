@@ -13,12 +13,19 @@
             <li class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/browse-jobs'>Browse Jobs</a>
             </li>
+            
             <li>
                 <a class ='nav-link p-3' routerLink='/submit-company'>Submit a Company</a>
             </li>
+        
             <li>
                 <a class ='nav-link p-3' routerLink='/browse-companies'>Browse Companies</a>
             </li>
+<!--
+            <li *ngIf='!isLoggedIn' class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/create-account'>Create Account</a>
+            </li>
+        -->
             <li *ngIf='!isLoggedIn' class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/login'>Login</a>
             </li>

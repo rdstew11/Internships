@@ -32,7 +32,7 @@ CREATE TABLE company (
   state TEXT NOT NULL,
   zipcode INTEGER NOT NULL,
 	description TEXT NOT NULL,
-	website_link TEXT,
+	website TEXT,
 	approved BOOLEAN DEFAULT FALSE,
   PRIMARY KEY ("name")
 
@@ -41,7 +41,7 @@ CREATE TABLE company (
 INSERT INTO accounts (username, password, account_type)
 VALUES ('admin','admin','admin');
 
-INSERT INTO company (name, street_address, city, state, zipcode, description, website_link)
+INSERT INTO company (name, street_address, city, state, zipcode, description, website)
 VALUES
 ('Booz Allen Hamiltion', '8283 Greensboro Drive', 'Mclean', 'Virginia', '22102',
 'Booz Allen Hamilton Holding Corporation is the parent of Booz Allen Hamilton Inc., an American management and 

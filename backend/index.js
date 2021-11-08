@@ -33,19 +33,22 @@ app.get('/', (req, res)=>{
     res.send('hello');
 });
 
-/**
- * Get unapproved postings
- */
-app.get('/unapproved', async (req, res) =>{
-    console.log('GET request on /unapproved');
-    const response = await postings.getUnapprovedPosts(pool);
-    res.status(200).send(response);
-});
-
 
 app.get('/postings', async(req, res) =>{
-    console.log('GET request on /postings');
-    const response = await postings.getApprovedPosts(pool);
+    const param = req.query.q;
+    let response;
+    if(param == 'approved'){
+        response = await postings.getApprovedPosts(pool);
+    }
+    else if(param == 'unapproved'){
+        response = await postings.getUnapprovedPosts(pool);
+    }
+    else{
+        console.log('specific GET on /postings');
+        console.log(param);
+        response = await postings.getPostingsByCompany(pool, param);
+        console.log(response);
+    }
     res.status(200).send(response);
 });
 
@@ -55,8 +58,8 @@ app.delete('/postings', async(req, res) =>{
     res.status(200);
 });
 
-app.put('/approve', async (req, res) =>{
-    console.log('PUT request on /approve');
+app.put('/postings', async (req, res) =>{
+    console.log('PUT request on /postings');
     //console.log(req.body.id);
     await postings.approvePost(pool, req.body.id);
     res.status(200);
@@ -91,6 +94,21 @@ app.get('/company', async (req, res) => {
     }
     res.status(200).send(response.rows);
 });
+
+
+app.put('/company', async (req, res) => {
+
+    console.log('PUT request on /company');
+    console.log(req.body.name)
+    await companies.approveCompany(pool, req.body.name);
+    res.status(200);
+})
+
+app.delete('/company', async (req, res) =>{
+    console.log('DELETE request on /company')
+    await companies.denyCompany(pool, req.body.name);
+    res.status(200);
+})
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');
 /**

@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container p-0">
     <div class="card-header">
         <div class='row '>
             <div class='col-6 p-0 text-left'>
-                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+company.id' aria-expanded='false'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-company"+company.id' aria-expanded='false'>
                     <h4>{{company.name}}</h4>
                 </button>                    
             </div>
@@ -10,10 +10,9 @@
                 <h6></h6>
             </div>
         </div>
-            
         
     </div>
-    <div [id]='"collapse" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+    <div [id]='"collapse-company" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
         <div class="card-body">
             <h5 class="card-title"><b>Description</b></h5>
             <p class="card-text">{{company.description}}</p> 
@@ -26,13 +25,13 @@
                 <div class='text-center'>
                     <span class='mx-3'>
                         <button class='btn btn-danger' type='button'
-                        data-toggle='modal' [attr.data-target]='"#deny-modal" + company.id'>
+                        data-toggle='modal' [attr.data-target]='"#deny-modal-company" + company.id'>
                             Deny
                         </button>
                     </span>
                     <span class='mx-3'>
                         <button class='btn btn-success' type='button'
-                        data-toggle='modal' [attr.data-target]='"#approve-modal" + company.id'>
+                        data-toggle='modal' [attr.data-target]='"#approve-modal-company" + company.id'>
                             Approve
                         </button>
                     </span>
@@ -43,7 +42,7 @@
 </div>
 
 <!--Approval Confirmation Modal-->
-<div class="modal fade text-center" [id]='"approve-modal" + company.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"approve-modal-company" + company.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -62,7 +61,7 @@ aria-labelledby="modal-title" aria-hidden="true">
   </div>
 </div>
 
-<div class="modal fade text-center" [id]='"deny-modal" + company.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"deny-modal-company" + company.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

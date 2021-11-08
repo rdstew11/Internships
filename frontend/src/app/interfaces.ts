@@ -22,13 +22,13 @@ export interface LoginCredentials{
 
 export interface Company{
     id: number,
-    name: String,
+    name: string,
     jobs?: JobPosting[],
     website?: String,
     description: String,
     street_address: String,
     state: String,
     city: String,
-    zipcode: number,
+    zipcode?: number,
 
 }

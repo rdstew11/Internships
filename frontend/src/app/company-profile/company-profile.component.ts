@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Company } from '../interfaces';
+import { Company, JobPosting } from '../interfaces';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'company-profile',
@@ -11,9 +12,12 @@ export class CompanyProfileComponent implements OnInit {
 
   @Input('company') company!: Company;
 
-  constructor() { }
+  jobs: JobPosting[] = [];
+
+  constructor(private backend: DatabaseService) { }
 
   ngOnInit(): void {
+    this.jobs = this.backend.getCompanyPostings(this.company);
   }
 
 }
