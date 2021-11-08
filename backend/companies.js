@@ -49,7 +49,7 @@ async function denyCompany(pool, name){
 
 async function searchCompanies(pool, q){
     try{
-        const template = `SELECT * FROM company WHERE name ILIKE '%${q}%';`;
+        const template = `SELECT * FROM company WHERE (name ILIKE '%${q}%) AND (approved = TRUE)';`;
         const res = await pool.query(template);
         console.log(res.rows);
         return res.rows;
