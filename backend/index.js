@@ -52,7 +52,7 @@ app.get('/postings', async(req, res) =>{
 });
 
 /**
- * Aprove post
+ * Approve post
  */
 app.put('/approvePost', async (req, res) =>{
     console.log('PUT request on /approvePost');
@@ -105,7 +105,7 @@ app.get('/students', async(req, res) =>{
 });
 
 /**
- * Aprove student
+ * Approve student
  */
 app.put('/approveStudent', async (req, res) =>{
     console.log('PUT request on /approveStudent');
@@ -129,6 +129,58 @@ app.delete('/students', async(req, res) =>{
     console.log('POST request on /students');
     console.log(req.body);
     const response = await students.addStudent(pool, req.body);
+    if(response.rowCount > 0){
+        res.sendStatus(201);
+    }
+    else{
+        res.sendStatus(404);
+    }
+
+});
+
+/**
+ * Get unapproved companies
+ */
+ app.get('/unapprovedCompanies', async (req, res) =>{
+    console.log('GET request on /unapprovedCompanies');
+    const response = await companies.getUnapprovedCompanies(pool);
+    res.status(200).send(response);
+});
+
+/**
+ * Get approved companies
+ */
+app.get('/companies', async(req, res) =>{
+    console.log('GET request on /companies');
+    const response = await companies.getApprovedCompanies(pool);
+    res.status(200).send(response);
+});
+
+/**
+ * Approve company
+ */
+ app.put('/approveCompany', async (req, res) =>{
+    console.log('PUT request on /approveCompany');
+    await companies.approveCompany(pool, req.body.name);
+    res.status(200);
+});
+
+/**
+ * Deny company
+ */
+app.delete('/companies', async(req, res) =>{
+    console.log('DELETE request on /companies')
+    await companies.denyCompany(pool, req.body.name);
+    res.status(200);
+});
+
+/**
+ * Create a new company 
+ */
+ app.post('/companies', async (req, res) =>{
+    console.log('POST request on /companies');
+    console.log(req.body);
+    const response = await companies.addCompany(pool, req.body);
     if(response.rowCount > 0){
         res.sendStatus(201);
     }
