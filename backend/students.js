@@ -19,7 +19,7 @@ async function addStudent(pool, q){
         const gender = q.gender;
         const ethnicity = q.ethnicity;
         const approved = q.approved;
-        const template = "INSERT INTO student (email, first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
+        const template = "INSERT INTO student (email, first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);";
         const res = await pool.query(template, [email, first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved]);
         console.log(res);
         return res;
