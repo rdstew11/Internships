@@ -8,6 +8,7 @@ module.exports = {
 
 async function addStudent(pool, q){
     try{
+        const email = q.email;
         const first_name = q.first_name;
         const last_name = q.last_name;
         const grad_date = q.grad_date;
@@ -18,8 +19,8 @@ async function addStudent(pool, q){
         const gender = q.gender;
         const ethnicity = q.ethnicity;
         const approved = q.approved;
-        const template = "INSERT INTO student (first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
-        const res = await pool.query(template, [first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved]);
+        const template = "INSERT INTO student (email, first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
+        const res = await pool.query(template, [email, first_name, last_name, grad_date, resume_filename, biography, gpa, external_link, gender, ethnicity, approved]);
         console.log(res);
         return res;
     }catch(err){
