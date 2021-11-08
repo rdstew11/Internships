@@ -28,3 +28,19 @@ CREATE TABLE company (
 	posting_id TEXT NOT NULL,
 	approved BOOLEAN DEFAULT FALSE
 );
+
+DROP TABLE IF EXISTS student ;
+CREATE TABLE student(
+	email TEXT NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	grad_date DATE NOT NULL,
+	resume_filename TEXT,
+	biography TEXT,
+	gpa FLOAT,
+	external_link TEXT,
+	gender TEXT,
+	ethnicity TEXT,
+	approved BOOLEAN DEFAULT FALSE
+);
+
