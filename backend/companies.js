@@ -2,7 +2,9 @@ module.exports = {
     searchCompanies,
     addCompany,
     approveCompany,
-    denyCompany
+    denyCompany,
+    getApprovedCompanies,
+    getUnapprovedCompanies
 }
 
 async function addCompany(pool, q){
@@ -53,6 +55,27 @@ async function searchCompanies(pool, q){
         const template = `SELECT * FROM company WHERE name ILIKE '%${q}%';`;
         const res = await pool.query(template);
         console.log(res.rows);
+        return res.rows;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
+}
+
+async function getApprovedCompanies(pool){
+    try{
+        const res = await pool.query("SELECT * FROM company WHERE approved = TRUE;");
+        console.log(res.rows)
+        return res.rows;
+    }catch(err){
+        console.log(err.stack);
+        return err;
+    }
+}
+
+async function getUnapprovedCompanies(pool){
+    try{
+        const res = await pool.query("SELECT * FROM company WHERE approved = FALSE;");
         return res.rows;
     }catch(err){
         console.log(err.stack);
