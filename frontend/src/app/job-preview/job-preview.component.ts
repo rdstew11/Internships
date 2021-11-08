@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { JobPosting } from '../jobPosting'
+import { JobPosting } from '../interfaces'
 
 @Component({
   selector: 'job-preview',

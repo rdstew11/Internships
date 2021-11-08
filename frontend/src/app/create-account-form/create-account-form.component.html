@@ -1,0 +1,27 @@
+<div class='container text-center bg-white rounded mt-5 p-5'  id='center' style=' max-width: 50rem;'>
+    <div class='my-4'><h1><b>Create Company Account</b></h1></div>
+    <form (ngSubmit)='onSubmit()' #createAccountForm='ngForm'> <!--104B8B-->
+        <div *ngIf='formSection == 1'>
+            <div id='inputField' >
+                <input #username='ngModel' id='username' name='username' type="text" required 
+                placeholder="Username" [(ngModel)]='credentials.username'>
+                <div [hidden]="username.valid || username.pristine" class='alert p-0'> <p>Username is required</p> </div>
+            </div>  
+            <div id='inputField'>
+                <input #password='ngModel' id='password' name='password' required type="password" 
+                placeholder="Password" [(ngModel)]='credentials.password'>
+                <div [hidden]="password.valid || password.pristine " class='alert p-0'> <p>Password is required</p> </div>
+            </div>
+            <div id='inputField'>
+                <input #password_confirm='ngModel' id='password_confirm' name='password_confirm' required 
+                type="password" placeholder="Confirm Password" [(ngModel)]='confirmation'>
+                <div [hidden]="password_confirm != password" class='alert p-0'> <p>Passwords do not match!</p> </div>
+            </div>
+            <button [disabled]='!(username.valid && password.valid)' (click)='onNext()'>Next</button>
+        </div>
+
+        <div>
+            
+        </div>
+    </form>
+</div>

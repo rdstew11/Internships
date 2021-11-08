@@ -4,7 +4,7 @@ import { Observable, throwError,} from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, shareReplay, retry} from 'rxjs/operators';
 
-import { JobPosting } from './jobPosting';
+import { JobPosting, Company } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,8 @@ export class DatabaseService {
 
   public getUnapprovedJobs(): JobPosting[]{
     let response: JobPosting[] = [];
-    this.http.get<any>(this.url+'/unapproved').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    const options = {params: new HttpParams().set('q', 'unapproved')};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -57,7 +58,8 @@ export class DatabaseService {
 
   public getApprovedJobs() :JobPosting[]{
     let response :JobPosting[] = [];
-    this.http.get<any>(this.url+'/postings').pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    const options = {params: new HttpParams().set('q', 'approved')};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -67,12 +69,75 @@ export class DatabaseService {
 
 
   public approveJob(job: JobPosting) :void{
-    console.log('put');
-    this.http.put<any>(this.url + '/approve', job).pipe(catchError(this.handleError)).subscribe();
+    this.http.put<any>(this.url + '/postings', job).subscribe(res => console.log(res));
   }
 
   public denyJob(id: number) :void{
-    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).pipe(catchError(this.handleError)).subscribe();
+    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).subscribe();
+  }
+
+
+  public getApprovedCompanies() : Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', 'approved')};
+    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+      res.forEach((el : Company) => {
+        companies.push(el);
+      }));
+    return companies;
+  }
+
+  public getUnapprovedCompanies() : Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', 'unapproved')};
+    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+      res.forEach((el : Company) => {
+        companies.push(el);
+      }));
+    return companies;    
+  }
+
+  public approveCompany(company: Company) : void {
+    this.http.put<any>(this.url + '/company', company).subscribe(res => console.log(res));
+  }
+
+  public denyCompany(name: String) : void {
+    this.http.put<any>(this.url + '/company', {body: {'name': name}}).subscribe(res => console.log(res));
+  }
+
+  public getCompanyPostings(company: Company) : JobPosting[] {
+    let jobs : JobPosting[] = [];
+    const options = {params: new HttpParams().set('q', company.name)};
+    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        jobs.push(el);
+      });
+    });
+
+    return jobs;
+  }
+
+  public searchPostings(keyword: string): JobPosting[] {
+    let jobs : JobPosting[] = [];
+    const options = {params: new HttpParams().set('q', keyword)};
+    this.http.get<any>(this.url+'/search-posts', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: JobPosting) => {
+        jobs.push(el);
+      });
+    });
+
+    return jobs;
+  }
+
+  public searchCompanies(keyword: string): Company[] {
+    let companies : Company[] = [];
+    const options = {params: new HttpParams().set('q', keyword)};
+    this.http.get<any>(this.url+'/search-companies', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: Company) => {
+        companies.push(el);
+      });
+    });
+    return companies;
   }
 
   /**
@@ -84,6 +149,9 @@ export class DatabaseService {
     if(error.status == 0){
       //client side or network error
       console.error('An error occured: ', error.error);
+    }
+    else if(error.status == 200){
+
     }
     else{
       console.error(`Backend returned code ${error.status}, body was: `, error.error);

@@ -1,9 +1,23 @@
 <div class='container bg-white mt-5 p-5 rounded'>
     <h1 class='text-center mx-auto'><b>Admin Portal</b></h1>
-    <ul style='list-style: none;' class='p-0 bg-white'>
-        <li *ngFor='let job of jobs'>
-            <admin-job-preview [id]='job.id' [job]='job' (removeItemEvent)='removeItem($event)'></admin-job-preview>
-        </li>
-    </ul>
-    <p *ngIf='jobs.length == 0'>There are no jobs waiting approval...</p>
+    <div>
+        <h3><b>Jobs</b></h3>
+        <ul style='list-style: none;' class='p-0 bg-white'>
+            <li *ngFor='let job of jobs'>
+                <admin-job-preview [id]='job.id' [job]='job' (removeItemEvent)='removeJobItem($event)'></admin-job-preview>
+            </li>
+        </ul>
+        <p *ngIf='jobs.length == 0'>There are no jobs waiting approval...</p>
+    </div>
+
+    <div class='mt-5'>
+        <h3><b>Companies</b></h3>
+        <ul style='list-style: none;' class='p-0 bg-white'>
+            <li *ngFor='let company of companies'>
+                <admin-company-profile [id]='company.id' [company]='company' (removeItemEvent)='removeCompanyItem($event)'></admin-company-profile>
+            </li>
+        </ul>
+        <p *ngIf='companies.length == 0'>There are no companies waiting approval...</p>
+    </div>
+    
 </div>

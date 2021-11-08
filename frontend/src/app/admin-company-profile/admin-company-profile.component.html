@@ -1,42 +1,37 @@
-
-<!-- Job Card-->
-<div class="container p-0" id='jobListing'>
+<div class="container p-0">
     <div class="card-header">
         <div class='row '>
             <div class='col-6 p-0 text-left'>
-                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-job"+job.id' aria-expanded='false'>
-                    <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-company"+company.id' aria-expanded='false'>
+                    <h4>{{company.name}}</h4>
                 </button>                    
             </div>
             <div class='col text-end'>
-                <h6>{{job.city}}, {{job.state}}</h6>
-                <div> Submitted: {{job.start_date | date:'shortDate'}}</div> 
+                <h6></h6>
             </div>
         </div>
-            
         
     </div>
-    <div [id]='"collapse-job" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+    <div [id]='"collapse-company" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
         <div class="card-body">
             <h5 class="card-title"><b>Description</b></h5>
-            <p class="card-text">{{job.description}}</p> 
+            <p class="card-text">{{company.description}}</p> 
             <h5><b>Contact</b></h5>
-            <a class='my-0' *ngIf='job.external_link' [href]='job.external_link'>{{job.external_link}}</a>
-            <p class='my-0'>{{job.email}}</p>
-            <p class='my-0' *ngIf='job.phone_number'>{{job.phone_number}}</p>
+            <a class='my-0' *ngIf='company.website' [href]='company.website'>{{company.website}}</a>
+            <p class='my-0'>{{company.street_address}} {{company.city}}, {{company.state}} {{company.zipcode}}</p>
             <div>
                 <br>
                 
                 <div class='text-center'>
                     <span class='mx-3'>
                         <button class='btn btn-danger' type='button'
-                        data-toggle='modal' [attr.data-target]='"#deny-modal-job" + job.id'>
+                        data-toggle='modal' [attr.data-target]='"#deny-modal-company" + company.id'>
                             Deny
                         </button>
                     </span>
                     <span class='mx-3'>
                         <button class='btn btn-success' type='button'
-                        data-toggle='modal' [attr.data-target]='"#approve-modal-job" + job.id'>
+                        data-toggle='modal' [attr.data-target]='"#approve-modal-company" + company.id'>
                             Approve
                         </button>
                     </span>
@@ -47,12 +42,12 @@
 </div>
 
 <!--Approval Confirmation Modal-->
-<div class="modal fade text-center" [id]='"approve-modal-job" + job.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"approve-modal-company" + company.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center pl-5">
-                <h5 class="modal-title mx-auto" id="modal-title">Approve "{{job.title}} &mdash; {{job.company_name}}"?</h5>
+                <h5 class="modal-title mx-auto" id="modal-title">Approve "{{company.name}}"?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -66,19 +61,19 @@ aria-labelledby="modal-title" aria-hidden="true">
   </div>
 </div>
 
-<div class="modal fade text-center" [id]='"deny-modal-job" + job.id' tabindex="-1"
+<div class="modal fade text-center" [id]='"deny-modal-company" + company.id' tabindex="-1"
 aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center pl-5">
-                <h5 class="modal-title mx-auto" id="modal-title">Deny "{{job.title}} &mdash; {{job.company_name}}"?</h5>
+                <h5 class="modal-title mx-auto" id="modal-title">Deny "{{company.name}}"?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
             </div>
 
             <div class="modal-body">
-                <p>This action will permanently delete the job.</p>
+                <p>This action will permanently delete the Company.</p>
                 <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
                 <span class='mx-3'><button class='btn btn-danger' data-dismiss='modal' (click)='deny()'>Confirm Denial</button></span>
             </div>

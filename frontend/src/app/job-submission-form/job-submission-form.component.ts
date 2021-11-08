@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {JobPosting } from '../jobPosting';
+import {JobPosting } from '../interfaces';
 import { DatabaseService } from '../database.service';
 
 @Component({

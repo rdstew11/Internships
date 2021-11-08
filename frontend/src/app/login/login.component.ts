@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'
 
-import { LoginCredentials } from '../loginCredentials';
+import { LoginCredentials } from '../interfaces';
 import { DatabaseService } from '../database.service';
 import { AuthService } from '../auth.service';
 

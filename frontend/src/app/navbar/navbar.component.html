@@ -8,19 +8,25 @@
     <div class='collapse navbar-collapse justify-content-center' style='margin-right: 8rem' id="collapsibleNavbar">
         <ul class='navbar-nav my-auto'>
             <li class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/submit'>Submit a Job</a>
+                <a class='nav-link p-3' routerLink='/submit-job'>Submit a Job</a>
             </li>
             <li class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/browse'>Browse Jobs</a>
+                <a class='nav-link p-3' routerLink='/browse-jobs'>Browse Jobs</a>
             </li>
-            <li *ngIf='!isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/login'>Login</a>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/submit-company'>Submit a Company</a>
             </li>
-            <li *ngIf='isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/browse-companies'>Browse Companies</a>
             </li>
-            <li *ngIf='isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' (click)='logout()'>Logout</a>
+            <li *ngIf='!(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/login'>Login</a>
+            </li>
+            <li *ngIf='(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
+            </li>
+            <li *ngIf='(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' (click)='logout()'>Logout</a>
             </li>
         </ul>
     </div>

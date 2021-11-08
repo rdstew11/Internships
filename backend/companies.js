@@ -2,7 +2,9 @@ module.exports = {
     searchCompanies,
     addCompany,
     approveCompany,
-    denyCompany
+    denyCompany,
+    getApprovedCompanies,
+    getUnapprovedCompanies
 }
 
 async function addCompany(pool, q){
@@ -15,10 +17,31 @@ async function addCompany(pool, q){
         const approved = false;
         const template = "INSERT INTO company (name, address, description, website_link, posting_id, approved) VALUES ($1, $2, $3, $4, $5, $6);";
         const res = await pool.query(template, [name, address, description, website_link, posting_id, approved]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack);
+        return err;
+    }
+}
+
+async function getApprovedCompanies(pool){
+    try{
+        const template = 'SELECT * FROM company WHERE approved = TRUE;';
+        const res = await pool.query(template,[]);
+        return res;
+    }catch(err){
+        console.log(err.stack)
+        return err;
+    }
+}
+
+async function getUnapprovedCompanies(pool){
+    try{
+        const template = 'SELECT * FROM company WHERE approved = FALSE;';
+        const res = await pool.query(template,[]);
+        return res;
+    }catch(err){
+        console.log(err.stack)
         return err;
     }
 }
@@ -27,7 +50,6 @@ async function approveCompany(pool, name){
     try{
         const template = "UPDATE company SET approved = TRUE WHERE name = $1;";
         const res = await pool.query(template, [name]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack)
@@ -39,7 +61,6 @@ async function denyCompany(pool, name){
     try{
         const template = "DELETE FROM company WHERE name = $1;";
         const res = await pool.query(template, [name]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack);
@@ -51,7 +72,6 @@ async function searchCompanies(pool, q){
     try{
         const template = `SELECT * FROM company WHERE name ILIKE '%${q}%';`;
         const res = await pool.query(template);
-        console.log(res.rows);
         return res.rows;
     }catch(err){
         console.log(err.stack);

@@ -1,0 +1,34 @@
+<div class="container p-0" id='comapnyListing'>
+    <div class="card-header m-0">
+        <div class='row text-left'>
+            <div class='col-6 p-0'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-company"+company.id' aria-expanded='false'>
+                    <h4 class=''>{{company.name}}</h4>
+                </button>                    
+            </div>
+            <div class='col text-end'>
+                <h6>{{company.city}}, {{company.state}}</h6>
+            </div>
+        </div>
+            
+        
+    </div>
+    <div [id]='"collapse-company" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+        <div class="card-body">
+            <h5 class="card-title"><b>Description</b></h5>
+            <p class="card-text">{{company.description}}</p> 
+
+            <div *ngIf='jobs.length!=0'>
+                <h5><b>Current Jobs Available</b></h5>
+                <ul>
+                    <li *ngFor='let job of jobs'>
+                        <job-preview [job]='job'></job-preview>
+                    </li>
+                </ul>
+            </div>
+            <h5><b>Contact</b></h5>
+            <a class='my-0' *ngIf='company.website' [href]='company.website'>{{company.website}}</a>
+            <p class='my-0'>{{company.street_address}} {{company.city}}, {{company.state}}</p>
+        </div>
+    </div>
+</div>
