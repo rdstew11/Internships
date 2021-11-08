@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError,shareReplay } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { LoginCredentials } from './interfaces';
@@ -13,8 +13,8 @@ import { LoginCredentials } from './interfaces';
 })
 export class AuthService {
 
-  loginUrl = 'http://127.0.0.1:8080/login';
-  loggedIn: Boolean = false;
+  loginUrl: string = 'http://127.0.0.1:8080/login';
+  private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -43,20 +43,27 @@ export class AuthService {
     localStorage.setItem('expiration', JSON.stringify(expiresAt.valueOf()));
     
     this.router.navigate(['/admin']);
-    this.loggedIn = true;
+    this.loginStatus.next(true);
   }
 
   /**
    * Removes token from browser storage
    */
   public logout(){
+    this.loginStatus.next(false);
     localStorage.removeItem('id_token');
     localStorage.removeItem('expiration');
+    this.router.navigate(['/browse-jobs'])
   }
 
-  public isLoggedIn():Boolean{
+  public checkLoginStatus():boolean{
     return(Date.now() < parseInt(localStorage.getItem('expiration')?? "0"));
   }
+
+  get isLoggedIn(){
+    return this.loginStatus.asObservable();
+  }
+
 
   /**
    * Basic error handling on request to backend server

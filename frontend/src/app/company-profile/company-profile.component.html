@@ -1,8 +1,8 @@
-<div class="container p-0" id='jobListing'>
+<div class="container p-0" id='comapnyListing'>
     <div class="card-header m-0">
         <div class='row text-left'>
             <div class='col-6 p-0'>
-                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+company.id' aria-expanded='false'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-company"+company.id' aria-expanded='false'>
                     <h4 class=''>{{company.name}}</h4>
                 </button>                    
             </div>
@@ -13,7 +13,7 @@
             
         
     </div>
-    <div [id]='"collapse" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+    <div [id]='"collapse-company" + company.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
         <div class="card-body">
             <h5 class="card-title"><b>Description</b></h5>
             <p class="card-text">{{company.description}}</p> 

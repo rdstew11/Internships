@@ -3,7 +3,7 @@
     <div class="card-header m-0">
         <div class='row text-left'>
             <div class='col-6 p-0'>
-                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse"+job.id' aria-expanded='false'>
+                <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-job"+job.id' aria-expanded='false'>
                     <h4 class=''>{{job.title}} &mdash;     {{job.company_name}}</h4>
                 </button>                    
             </div>
@@ -15,7 +15,7 @@
             
         
     </div>
-    <div [id]='"collapse" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
+    <div [id]='"collapse-job" + job.id' class='collapse' style='border-bottom: 1px solid rgba(0,0,0,.125)'>
         <div class="card-body">
             <h5 class="card-title"><b>Description</b></h5>
             <p class="card-text">{{job.description}}</p> 

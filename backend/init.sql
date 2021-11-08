@@ -43,7 +43,7 @@ VALUES ('admin','admin','admin');
 
 INSERT INTO company (name, street_address, city, state, zipcode, description, website)
 VALUES
-('Booz Allen Hamiltion', '8283 Greensboro Drive', 'Mclean', 'Virginia', '22102',
+('Booz Allen Hamilton', '8283 Greensboro Drive', 'Mclean', 'Virginia', '22102',
 'Booz Allen Hamilton Holding Corporation is the parent of Booz Allen Hamilton Inc., an American management and 
 information technology consulting firm, headquartered in McLean, Virginia, in Greater Washington, D.C., with 80 other 
 offices around the globe', 'https://boozallen.com' ),

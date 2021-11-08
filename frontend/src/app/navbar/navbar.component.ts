@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
@@ -10,21 +10,20 @@ import { AuthService } from '../auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn: Boolean = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) { 
+
+  }
+
+  loginStatus$!: Observable<Boolean>;
+
   ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event.constructor.name === 'NavigationEnd'){
-        this.isLoggedIn = this.auth.loggedIn;
-      }
-    })
+
+    this.loginStatus$ = this.auth.isLoggedIn;
   }
 
   logout(){
-    this.auth.loggedIn = false;
     this.auth.logout();
-    this.router.navigate(['/browse']);
   }
 
 }

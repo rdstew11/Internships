@@ -55,14 +55,14 @@ app.get('/postings', async(req, res) =>{
 app.delete('/postings', async(req, res) =>{
     console.log('DELETE request on /postings')
     await postings.denyPost(pool, req.body.id);
-    res.status(200);
+    res.sendStatus(200);
 });
 
 app.put('/postings', async (req, res) =>{
     console.log('PUT request on /postings');
     //console.log(req.body.id);
     await postings.approvePost(pool, req.body.id);
-    res.status(200);
+    res.sendStatus(200);
 });
 
 
@@ -101,13 +101,13 @@ app.put('/company', async (req, res) => {
     console.log('PUT request on /company');
     console.log(req.body.name)
     await companies.approveCompany(pool, req.body.name);
-    res.status(200);
+    res.sendStatus(200);
 })
 
 app.delete('/company', async (req, res) =>{
     console.log('DELETE request on /company')
     await companies.denyCompany(pool, req.body.name);
-    res.status(200);
+    res.sendStatus(200);
 })
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');

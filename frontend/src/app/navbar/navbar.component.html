@@ -13,27 +13,20 @@
             <li class='nav-item active'>
                 <a class='nav-link p-3' routerLink='/browse-jobs'>Browse Jobs</a>
             </li>
-            
-            <li>
-                <a class ='nav-link p-3' routerLink='/submit-company'>Submit a Company</a>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/submit-company'>Submit a Company</a>
             </li>
-        
-            <li>
-                <a class ='nav-link p-3' routerLink='/browse-companies'>Browse Companies</a>
+            <li class='nav-item active'>
+                <a class='nav-link p-3' routerLink='/browse-companies'>Browse Companies</a>
             </li>
-<!--
-            <li *ngIf='!isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/create-account'>Create Account</a>
+            <li *ngIf='!(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/login'>Login</a>
             </li>
-        -->
-            <li *ngIf='!isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/login'>Login</a>
+            <li *ngIf='(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
             </li>
-            <li *ngIf='isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' routerLink='/admin'>Admin Portal</a>
-            </li>
-            <li *ngIf='isLoggedIn' class='nav-item active'>
-                <a class='nav-link p-3' (click)='logout()'>Logout</a>
+            <li *ngIf='(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' (click)='logout()'>Logout</a>
             </li>
         </ul>
     </div>

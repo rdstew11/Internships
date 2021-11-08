@@ -17,7 +17,6 @@ async function addCompany(pool, q){
         const approved = false;
         const template = "INSERT INTO company (name, address, description, website_link, posting_id, approved) VALUES ($1, $2, $3, $4, $5, $6);";
         const res = await pool.query(template, [name, address, description, website_link, posting_id, approved]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack);
@@ -29,7 +28,6 @@ async function getApprovedCompanies(pool){
     try{
         const template = 'SELECT * FROM company WHERE approved = TRUE;';
         const res = await pool.query(template,[]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack)
@@ -41,7 +39,6 @@ async function getUnapprovedCompanies(pool){
     try{
         const template = 'SELECT * FROM company WHERE approved = FALSE;';
         const res = await pool.query(template,[]);
-        console.log(res);
         return res;
     }catch(err){
         console.log(err.stack)

@@ -69,11 +69,11 @@ export class DatabaseService {
 
 
   public approveJob(job: JobPosting) :void{
-    this.http.put<any>(this.url + '/postings', job).pipe(catchError(this.handleError)).subscribe();
+    this.http.put<any>(this.url + '/postings', job).subscribe(res => console.log(res));
   }
 
   public denyJob(id: number) :void{
-    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).pipe(catchError(this.handleError)).subscribe();
+    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).subscribe();
   }
 
 
@@ -98,11 +98,11 @@ export class DatabaseService {
   }
 
   public approveCompany(company: Company) : void {
-    this.http.put<any>(this.url + '/company', company).pipe(catchError(this.handleError)).subscribe();
+    this.http.put<any>(this.url + '/company', company).subscribe(res => console.log(res));
   }
 
   public denyCompany(name: String) : void {
-    this.http.put<any>(this.url + '/company', {body: {'name': name}}).pipe(catchError(this.handleError)).subscribe();
+    this.http.put<any>(this.url + '/company', {body: {'name': name}}).subscribe(res => console.log(res));
   }
 
   public getCompanyPostings(company: Company) : JobPosting[] {
