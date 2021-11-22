@@ -6,7 +6,8 @@ module.exports = {
     getUnapprovedPosts,
     approvePost,
     denyPost,
-    getPostingsByCompany
+    getPostingsByCompany,
+    removePastPostings
 }
 
 async function searchPosts(pool, q){
@@ -105,3 +106,13 @@ async function getPostingsByCompany(pool, company){
     }
 }
 
+async function removePastPostings(pool, date){
+	try{
+		const template = "DELETE FROM postings WHERE end_date=$1"
+		const res = await pool.query(template, [date]);
+		return res;
+	}catch(err){
+		console.log(err.stack);
+		return err;
+	}
+}
