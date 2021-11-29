@@ -8,6 +8,7 @@ import { JobBrowseComponent } from './job-browse/job-browse.component';
 import { CompanyBrowseComponent } from './company-browse/company-browse.component';
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { CompanySubmissionFormComponent } from './company-submission-form/company-submission-form.component';
+import { StudentBrowseComponent } from './student-browse/student-browse.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: '', component: JobBrowseComponent},
   {path: 'browse-companies', component: CompanyBrowseComponent},
   {path: 'create-account', component: CreateAccountFormComponent},
-  {path: 'submit-company', component: CompanySubmissionFormComponent}
+  {path: 'submit-company', component: CompanySubmissionFormComponent},
+  {path: 'browse-students', component: StudentBrowseComponent},
 ];
 
 @NgModule({

@@ -32,3 +32,14 @@ export interface Company{
     zipcode?: number,
 
 }
+
+export interface Student{
+    id: number,
+    name: string,
+    resumeLink?: string,
+    gpa?: number,
+    email: string,
+    phone?: string,
+    website?: string,
+    biography?: string,
+}
