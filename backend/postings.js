@@ -96,7 +96,7 @@ async function denyPost(pool, id){
 
 async function getPostingsByCompany(pool, company){
     try{
-        const template = "SELECT * FROM postings WHERE company_name=$1"
+        const template = "SELECT * FROM postings WHERE company_name=$1 AND approved=TRUE"
         const res = await pool.query(template, [company]);
         return res.rows;
     }catch(err){

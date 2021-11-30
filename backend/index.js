@@ -110,6 +110,32 @@ app.delete('/company', async (req, res) =>{
     res.sendStatus(200);
 })
 
+
+app.get('/search-postings', async (req, res) => {
+    console.log('GET request on /search-postings');
+    console.log(req.query.q);
+    const response = await postings.searchPosts(pool, req.query.q);
+    res.status(200).send(response);
+});
+
+app.get('/search-companies', async (req, res) => {
+    console.log('GET request on /search-companies');
+    const response = await companies.searchCompanies(pool, req.query.q);
+    res.status(200).send(response);
+})
+
+app.post('/company', async (req, res) =>{
+    console.log('POST request on /postings');
+    console.log(req.body);
+    const response = await companies.addCompany(pool, req.body);
+    if(response.rowCount > 0){
+        res.sendStatus(201);
+    }
+    else{
+        res.sendStatus(404);
+    }
+})
+
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');
 /**
  * User authentication
@@ -143,7 +169,8 @@ app.post('/login', async (req,res)=>{
 
         res.status(200).json({
             jwt: jwtBearerToken,
-            expiration: 120
+            expiration: 120,
+            type: response.rows[0].account_type
         });
     }
     else{

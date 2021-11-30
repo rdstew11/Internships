@@ -1,5 +1,5 @@
 <nav class='navbar navbar-expand-md navbar-dark p-0' style='background-color: #002b5a; color: white'>
-    <a class='nav-brand ms-1 text-decoration-none link-light'>CPSC Jop Portal</a>
+    <a class='nav-brand ms-1 text-decoration-none link-light' routerLink=''><img alt='UMW Logo' style='max-width: 6rem;' class='img-fluid my-1 mx-3'src='./assets/umwlogo.png'></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -21,6 +21,9 @@
             </li>
             <li *ngIf='!(loginStatus$ | async) as loginStatus' class='nav-item active'>
                 <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/login'>Login</a>
+            </li>
+            <li *ngIf='!(loginStatus$ | async) as loginStatus' class='nav-item active'>
+                <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/create-account'>Create Account</a>
             </li>
             <li *ngIf='(loginStatus$ | async) as loginStatus' class='nav-item active'>
                 <a *ngIf='loginStatus' class='nav-link p-3' routerLink='/admin'>Admin Portal</a>

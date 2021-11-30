@@ -1,42 +1,45 @@
-
-<div class='container text-center bg-white rounded mt-5 p-5' style='max-width: 50rem;'>
-    <h1> Submit a Company </h1>
-    <form #submissionForm='ngForm' (ngSubmit)='onSubmit()' id='companyForm' >
-        <div id='form-input'>
-            <input #name='ngModel' placeholder='Company Name' class='inputField' [(ngModel)]='company.name' type='text' id='name' name='name' required>
-            <div [hidden]="name.valid || name.pristine" class='alert'> Company Name is required </div>
-        </div>
-        <div class='row' id='form-input'>
-            <input #address='ngModel' placeholder="Street address" class='inputField' [(ngModel)]='company.street_address' 
-            id='address' name='address' type='text' required>
-            <div [hidden]="address.valid || address.pristine" class='alert'> Street address is required </div>
-
-        </div>
-        <div class='row' id="form-input">
-            <div class='col p-0 me-2'>
-                <input #city='ngModel' placeholder='City' class='inputField' [(ngModel)]='company.city' id='city' name='city' type='text' required>
-                <div [hidden]="city.valid || city.pristine" class='alert'> City is required </div>
+<div class='container text-center p-5' 
+style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100vh; max-width: 50rem;'>
+    <div style='max-width: 50rem; margin: auto;'>
+        <h1> Submit a Company </h1>
+        <form #submissionForm='ngForm' (ngSubmit)='onSubmit()' id='companyForm' >
+            <div id='form-input'>
+                <input #name='ngModel' placeholder='Company Name' class='inputField' [(ngModel)]='company.name' type='text' id='name' name='name' required>
+                <div [hidden]="name.valid || name.pristine" class='alert'> Company Name is required </div>
             </div>
-            <div class='col p-0 mx-2'>
-                <input #state='ngModel' placeholder='State' class='inputField' [(ngModel)]='company.state' id='state' name='state' type='text' required>
-                <div [hidden]="state.valid || state.pristine" class='alert'> State is required </div>
+            <div class='row' id='form-input'>
+                <input #address='ngModel' placeholder="Street address" class='inputField' [(ngModel)]='company.address' 
+                id='address' name='address' type='text' required>
+                <div [hidden]="address.valid || address.pristine" class='alert'> Street address is required </div>
+    
             </div>
-            <div class='col  p-0 ms-2'>
-                <input #zipcode = 'ngModel' placeholder='Zipcode' class='inputField' [(ngModel)]='company.zipcode' id='zipcode' name='zipcode' required>
-                <div [hidden]="zipcode.valid || zipcode.pristine" class='alert'> Zipcode is required </div>
+            <div class='row' id="form-input">
+                <div class='col p-0 me-2'>
+                    <input #city='ngModel' placeholder='City' class='inputField' [(ngModel)]='company.city' id='city' name='city' type='text' required>
+                    <div [hidden]="city.valid || city.pristine" class='alert'> City is required </div>
+                </div>
+                <div class='col p-0 mx-2'>
+                    <input #state='ngModel' placeholder='State' class='inputField' [(ngModel)]='company.state' id='state' name='state' type='text' required>
+                    <div [hidden]="state.valid || state.pristine" class='alert'> State is required </div>
+                </div>
+                <div class='col  p-0 ms-2'>
+                    <input #zipcode = 'ngModel' placeholder='Zipcode' class='inputField' [(ngModel)]='company.zipcode' id='zipcode' name='zipcode' required>
+                    <div [hidden]="zipcode.valid || zipcode.pristine" class='alert'> Zipcode is required </div>
+                </div>
             </div>
-        </div>
-
-        <div id='form-input'>
-            <input #website='ngModel' placeholder='Website' class='inputField' [(ngModel)]='company.website' id='website' name='website' type='text'>
-        </div>
-        <div id='description'>
+    
+            <div id='form-input'>
+                <input #website='ngModel' placeholder='Website' class='inputField' [(ngModel)]='company.website' id='website' name='website' type='text'>
+            </div>
+            <div id='description'>
+                
+                <p><b>Description</b></p>
+                <textarea #description='ngModel' name='description' class='inputField' [(ngModel)]='company.description' form='companyForm' required></textarea>
+                <div [hidden]="description.valid || description.pristine" class='alert'> Description is required </div>
+            </div>
             
-            <p><b>Description</b></p>
-            <textarea #description='ngModel' name='description' class='inputField' [(ngModel)]='company.description' form='companyForm' required></textarea>
-            <div [hidden]="description.valid || description.pristine" class='alert'> Description is required </div>
-        </div>
-        
-        <button [disabled]='!submissionForm.form.valid'  type='submit'>Submit</button>
-    </form>
+            <button [disabled]='!submissionForm.form.valid'  type='submit'>Submit</button>
+        </form>
+    </div>
+    
 </div>

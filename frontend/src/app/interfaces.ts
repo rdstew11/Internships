@@ -26,7 +26,7 @@ export interface Company{
     jobs?: JobPosting[],
     website?: String,
     description: String,
-    street_address: String,
+    address: String,
     state: String,
     city: String,
     zipcode?: number,

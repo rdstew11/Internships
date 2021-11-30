@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS company ;
 CREATE TABLE company (
   id SERIAL NOT NULL,
 	name TEXT NOT NULL,
-	street_address TEXT NOT NULL,
+	address TEXT NOT NULL,
   city TEXT NOT NULL,
   state TEXT NOT NULL,
   zipcode INTEGER NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE company (
 INSERT INTO accounts (username, password, account_type)
 VALUES ('admin','admin','admin');
 
-INSERT INTO company (name, street_address, city, state, zipcode, description, website)
+INSERT INTO company (name, address, city, state, zipcode, description, website)
 VALUES
 ('Booz Allen Hamilton', '8283 Greensboro Drive', 'Mclean', 'Virginia', '22102',
 'Booz Allen Hamilton Holding Corporation is the parent of Booz Allen Hamilton Inc., an American management and 

@@ -1,7 +1,8 @@
-<div class='container p-5 bg-white rounded mt-5'>
+<div class='container p-5' style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100vh;'>
     <h1 class='mx-auto mb-4 text-center'>Browse Companies</h1>
     <form class='md-form form-sm row' (ngSubmit)='onSubmit()'>
-        <input class='form-control form-control-sm ml d-inline col' type='text'  placeholder='Search' aria-label='Search' [(ngModel)]='keyword' mdbInput required>
+        <input  #Search='ngModel' class='form-control form-control-sm ml d-inline col' type='text' name='Search' id='Search'
+        placeholder='Search' aria-label='Search' [(ngModel)]='keyword' mdbInput required>
         <button class='col-sm-auto mx-5  btn btn-primary' type='Submit'>Search</button>
     </form>
     <ul class='p-0'>

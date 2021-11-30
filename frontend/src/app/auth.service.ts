@@ -13,7 +13,8 @@ import { LoginCredentials } from './interfaces';
 })
 export class AuthService {
 
-  loginUrl: string = 'http://127.0.0.1:8080/login';
+  url: string = 'http://34.145.192.59/backend';
+  loginUrl: string = 'http://34.145.192.59/backendlogin';
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -27,7 +28,11 @@ export class AuthService {
  */
   public login(credentials: LoginCredentials){
     //this POST request sends username and password to backend to be validated against DB
-    this.http.post<any>(this.loginUrl, credentials).pipe(catchError(this.handleLoginError),shareReplay(1)).subscribe(res => this.setSession(res));
+
+    console.log(credentials);
+    this.http.post<any>(this.loginUrl, credentials).pipe(catchError(this.handleLoginError),shareReplay(1)).subscribe(res => {
+      this.setSession(res);
+    });
   }
 
 
@@ -41,6 +46,7 @@ export class AuthService {
   
     localStorage.setItem('id_token', authResult.jwt)
     localStorage.setItem('expiration', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('type', authResult.type);
     
     this.router.navigate(['/admin']);
     this.loginStatus.next(true);
@@ -53,11 +59,25 @@ export class AuthService {
     this.loginStatus.next(false);
     localStorage.removeItem('id_token');
     localStorage.removeItem('expiration');
+    localStorage.removeItem('type');
     this.router.navigate(['/browse-jobs'])
   }
 
   public checkLoginStatus():boolean{
     return(Date.now() < parseInt(localStorage.getItem('expiration')?? "0"));
+  }
+
+  public createAccount(credentials: LoginCredentials): boolean{
+    let success = true;
+    this.http.post<any>(this.url + "accounts", credentials).pipe(shareReplay(1)).subscribe(res => {
+      if(res.error === true){
+          success = false;
+      }
+      else{
+        this.setSession(res);
+      }
+    });
+    return success;
   }
 
   get isLoggedIn(){

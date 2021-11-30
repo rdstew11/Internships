@@ -11,9 +11,9 @@ import { JobPosting, Company } from './interfaces';
 })
 export class DatabaseService {
 
-  acccountsUrl = 'http://127.0.0.1:8080/accounts';
-  postingsUrl = 'http://127.0.0.1:8080/postings';
-  url='http://127.0.0.1:8080';
+  //acccountsUrl = 'http://127.0.0.1:8080/accounts';
+  //postingsUrl = 'http://127.0.0.1:8080/postings';
+  url='http://34.145.192.59/backend';
 
 
   /**
@@ -31,22 +31,18 @@ export class DatabaseService {
    * @param jobDetails <JobPosting> posting to be added to database
    */
   public addJob(jobDetails: JobPosting): any{
-    console.log('POST request to ' + this.postingsUrl);
-    const response:any = null;
-     this.http.post<any>(this.postingsUrl, jobDetails)
+    this.http.post<any>(this.url + 'postings', jobDetails)
       .pipe(
         catchError(this.handleError), shareReplay(1)
-      ).subscribe(res => response);
-
-    console.log(response);
-    this.router.navigate(['/browse']);
-    
+      ).subscribe();
+    this.router.navigate(['/browse-jobs']);
+  
   }
 
   public getUnapprovedJobs(): JobPosting[]{
     let response: JobPosting[] = [];
     const options = {params: new HttpParams().set('q', 'unapproved')};
-    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    this.http.get<any>(this.url+'postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -59,7 +55,7 @@ export class DatabaseService {
   public getApprovedJobs() :JobPosting[]{
     let response :JobPosting[] = [];
     const options = {params: new HttpParams().set('q', 'approved')};
-    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    this.http.get<any>(this.url+'postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         response.push(el);
       });
@@ -69,18 +65,18 @@ export class DatabaseService {
 
 
   public approveJob(job: JobPosting) :void{
-    this.http.put<any>(this.url + '/postings', job).subscribe(res => console.log(res));
+    this.http.put<any>(this.url + 'postings', job).subscribe(res => console.log(res));
   }
 
   public denyJob(id: number) :void{
-    this.http.delete<any>(this.url + '/postings', {body: {'id': id}} ).subscribe();
+    this.http.delete<any>(this.url + 'postings', {body: {'id': id}} ).subscribe();
   }
 
 
   public getApprovedCompanies() : Company[] {
     let companies : Company[] = [];
     const options = {params: new HttpParams().set('q', 'approved')};
-    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+    this.http.get<Company[]>(this.url + 'company', options).pipe(catchError(this.handleError)).subscribe(res =>
       res.forEach((el : Company) => {
         companies.push(el);
       }));
@@ -90,7 +86,7 @@ export class DatabaseService {
   public getUnapprovedCompanies() : Company[] {
     let companies : Company[] = [];
     const options = {params: new HttpParams().set('q', 'unapproved')};
-    this.http.get<Company[]>(this.url + '/company', options).pipe(catchError(this.handleError)).subscribe(res =>
+    this.http.get<Company[]>(this.url + 'company', options).pipe(catchError(this.handleError)).subscribe(res =>
       res.forEach((el : Company) => {
         companies.push(el);
       }));
@@ -98,17 +94,17 @@ export class DatabaseService {
   }
 
   public approveCompany(company: Company) : void {
-    this.http.put<any>(this.url + '/company', company).subscribe(res => console.log(res));
+    this.http.put<any>(this.url + 'company', company).subscribe(res => console.log(res));
   }
 
   public denyCompany(name: String) : void {
-    this.http.put<any>(this.url + '/company', {body: {'name': name}}).subscribe(res => console.log(res));
+    this.http.delete<any>(this.url + 'company', {body: {'name': name}}).subscribe(res => console.log(res));
   }
 
   public getCompanyPostings(company: Company) : JobPosting[] {
     let jobs : JobPosting[] = [];
     const options = {params: new HttpParams().set('q', company.name)};
-    this.http.get<any>(this.url+'/postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    this.http.get<any>(this.url+'postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         jobs.push(el);
       });
@@ -120,24 +116,32 @@ export class DatabaseService {
   public searchPostings(keyword: string): JobPosting[] {
     let jobs : JobPosting[] = [];
     const options = {params: new HttpParams().set('q', keyword)};
-    this.http.get<any>(this.url+'/search-posts', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    this.http.get<any>(this.url+'search-postings', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: JobPosting) => {
         jobs.push(el);
       });
     });
-
+    console.log(jobs);
     return jobs;
   }
 
   public searchCompanies(keyword: string): Company[] {
     let companies : Company[] = [];
     const options = {params: new HttpParams().set('q', keyword)};
-    this.http.get<any>(this.url+'/search-companies', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+    this.http.get<any>(this.url+'search-companies', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
       res.forEach((el: Company) => {
         companies.push(el);
       });
     });
     return companies;
+  }
+
+  public addCompany(company:Company): void {
+    this.http.post<any>(this.url + 'company', company)
+      .pipe(
+        catchError(this.handleError), shareReplay(1)
+      ).subscribe();
+    this.router.navigate(['/browse-companies']);
   }
 
   /**

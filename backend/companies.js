@@ -11,12 +11,14 @@ async function addCompany(pool, q){
     try{
         const name = q.name;
         const address = q.address;
+        const city = q.city;
+        const state = q.state;
+        const zipcode = q.zipcode;
         const description = q.description;
-        const website_link = q.website_link;
-        const posting_id = q.posting_id;
+        const website = q.website;
         const approved = false;
-        const template = "INSERT INTO company (name, address, description, website_link, posting_id, approved) VALUES ($1, $2, $3, $4, $5, $6);";
-        const res = await pool.query(template, [name, address, description, website_link, posting_id, approved]);
+        const template = "INSERT INTO company (name, address, city, state, zipcode, description, website) VALUES ($1, $2, $3, $4, $5, $6, $7);";
+        const res = await pool.query(template, [name, address, city, state, zipcode, description, website]);
         return res;
     }catch(err){
         console.log(err.stack);
@@ -70,7 +72,7 @@ async function denyCompany(pool, name){
 
 async function searchCompanies(pool, q){
     try{
-        const template = `SELECT * FROM company WHERE (name ILIKE '%${q}%) AND (approved = TRUE)';`;
+        const template = `SELECT * FROM company WHERE (name ILIKE '%${q}%') AND (approved = TRUE);`;
         const res = await pool.query(template);
         return res.rows;
     }catch(err){
