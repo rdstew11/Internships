@@ -2,7 +2,7 @@
     <div class='card'>
         <div class='card-header'>
             <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-student"+student.id' aria-expanded='false'>
-                <h4 class=''>{{student.firstname}}  {{student.lastname}} <span *ngIf="student.grad_date"> &mdash; {{student.major}}</span></h4>
+                <h4 class=''>{{student.firstname}} {{student.lastname}} <span *ngIf="student.grad_date"> &mdash; {{student.major}}</span></h4>
             </button>  
         </div>
         <div [id]='"collapse-student"+student.id' class="card collapse">
@@ -66,8 +66,68 @@
                         
                     </div>
                 </div>
+
+                <div>
+                    <br>
+                    
+                    <div class='text-center'>
+                        <span class='mx-3'>
+                            <button class='btn btn-danger' type='button'
+                            data-toggle='modal' [attr.data-target]='"#deny-modal-student" + student.id'>
+                                Deny
+                            </button>
+                        </span>
+                        <span class='mx-3'>
+                            <button class='btn btn-success' type='button'
+                            data-toggle='modal' [attr.data-target]='"#approve-modal-student" + student.id'>
+                                Approve
+                            </button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
+</div>
+
+<!--Approval Confirmation Modal-->
+<div class="modal fade text-center" [id]='"approve-modal-student" + student.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Approve "{{student.firstname}} {{student.lastname}}
+                    <span *ngIf='student.grad_date'>&mdash; {{student.major}}</span>"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-success' data-dismiss='modal' (click)='approve()'>Confirm Approval</button></span>
+            </div>
+        </div>
+  </div>
+</div>
+
+<div class="modal fade text-center" [id]='"deny-modal-student" + student.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Deny "{{student.firstname}} {{student.lastname}}
+                    <span *ngIf='student.grad_date'>&mdash; {{student.major}}</span>"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <p>This action will permanently delete the student profile.</p>
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-danger' data-dismiss='modal' (click)='deny()'>Confirm Denial</button></span>
+            </div>
+        </div>
+  </div>
 </div>

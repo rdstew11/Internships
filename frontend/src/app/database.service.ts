@@ -13,8 +13,8 @@ export class DatabaseService {
 
   //acccountsUrl = 'http://127.0.0.1:8080/accounts';
   //postingsUrl = 'http://127.0.0.1:8080/postings';
-  url = 'http://127.0.0.1:8080/';
-  //url='http://34.145.192.59/backend';
+  //url = 'http://127.0.0.1:8080/';
+  url='http://34.145.192.59/backend';
 
 
   /**
@@ -145,8 +145,27 @@ export class DatabaseService {
     this.router.navigate(['/browse-companies']);
   }
 
+  public addStudent(student: Student): void {
+    this.http.post<any>(this.url + 'students', student)
+      .pipe(
+        catchError(this.handleError), shareReplay(1)
+      ).subscribe();
+      this.router.navigate(['/browse-students']);
+  }
 
   public getApprovedStudents(): Student[]{
+    let response: Student[] = [];
+    const options = {params: new HttpParams().set('q', 'approved')};
+    this.http.get<any>(this.url+'students', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: Student) => {
+        response.push(el);
+      });
+    });
+    return response;
+  }
+
+
+  public getUnapprovedStudents(): Student[]{
     let response: Student[] = [];
     const options = {params: new HttpParams().set('q', 'unapproved')};
     this.http.get<any>(this.url+'students', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
@@ -155,6 +174,24 @@ export class DatabaseService {
       });
     });
     return response;
+  }
+
+  public approveStudent(student: Student): void{
+    this.http.put(this.url + 'students', student)
+    .pipe(
+      catchError(this.handleError),
+      retry(3)
+    ).subscribe();
+    return;
+  }
+
+  public denyStudent(student: Student): void{
+    this.http.delete(this.url + 'students', {body: {'student': student}})
+    .pipe(
+      catchError(this.handleError),
+      shareReplay(1)
+    ).subscribe();
+    return;
   }
 
   /**

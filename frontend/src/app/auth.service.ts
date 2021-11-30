@@ -12,9 +12,9 @@ import { LoginCredentials } from './interfaces';
   providedIn: 'root'
 })
 export class AuthService {
-  loginUrl = 'http://127.0.0.1:8080/login';
+  //loginUrl = 'http://127.0.0.1:8080/login';
   url: string = 'http://34.145.192.59/backend';
-  //loginUrl: string = 'http://34.145.192.59/backendlogin';
+  loginUrl: string = 'http://34.145.192.59/backendlogin';
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
 
   constructor(private http: HttpClient, private router: Router) { }

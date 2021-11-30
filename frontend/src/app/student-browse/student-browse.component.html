@@ -1,12 +1,14 @@
 
-<div class='container p-5' style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100%;'>
+<div class='container p-5' style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100%; min-height: 100vh;'>
     <h1 class='mx-auto mb-4 text-center'>Browse Students</h1>
 
+    <div  class='text-center' *ngIf='students.length==0'>
+        There are not students to browse currently...
+    </div>
 
-
-   <ul class='p-0 mt-3'>
+    <ul class='p-0 mt-3'>
        <li *ngFor='let student of students'>
            <student-profile [student]='student'></student-profile>
        </li>
-   </ul>
+    </ul>
 </div>

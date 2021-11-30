@@ -10,7 +10,7 @@ import { Student } from '../interfaces';
 })
 export class StudentBrowseComponent implements OnInit {
 
-  students: Student[] = [{id:1, name: 'ryan', email:'hey'}];
+  students: Student[] = [];
 
   constructor(private backend : DatabaseService) { }
 

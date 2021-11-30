@@ -9,6 +9,7 @@ import { CompanyBrowseComponent } from './company-browse/company-browse.componen
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { CompanySubmissionFormComponent } from './company-submission-form/company-submission-form.component';
 import { StudentBrowseComponent } from './student-browse/student-browse.component';
+import { SubmitStudentComponent } from './submit-student/submit-student.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'create-account', component: CreateAccountFormComponent},
   {path: 'submit-company', component: CompanySubmissionFormComponent},
   {path: 'browse-students', component: StudentBrowseComponent},
+  {path: 'submit-student', component: SubmitStudentComponent}
 ];
 
 @NgModule({

@@ -2,9 +2,9 @@
     <div class='my-4'><h1><b>Create Account</b></h1></div>
     <form [formGroup]='accountGroup'> <!--104B8B-->
 
-        <div *ngIf='formSection == 1'>
+        <div>
             <select name='accountType' id='accountType' >
-                <option value='' disable>Select Account Type</option>
+                <option value='' disabled>Select Account Type</option>
                 <option *ngFor='let account of accountTypes' [ngValue]='account'>{{account}}</option>
                 
             </select>
