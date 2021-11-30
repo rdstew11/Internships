@@ -136,6 +136,16 @@ app.post('/company', async (req, res) =>{
     }
 })
 
+
+app.post('/accounts', async(req, res) => {
+    console.log('POST on /accounts');
+    const response = await accounts.addAccount(pool, req.body);
+
+    if(response.error != null){
+        
+    }
+})
+
 const RSA_PRIVATE_KEY = fs.readFileSync('./itRS256.key');
 /**
  * User authentication

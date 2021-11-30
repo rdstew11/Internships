@@ -4,7 +4,7 @@ import { Observable, throwError,} from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, shareReplay, retry} from 'rxjs/operators';
 
-import { JobPosting, Company } from './interfaces';
+import { JobPosting, Company, Student } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class DatabaseService {
 
   //acccountsUrl = 'http://127.0.0.1:8080/accounts';
   //postingsUrl = 'http://127.0.0.1:8080/postings';
-  url='http://34.145.192.59/backend';
+  url = 'http://127.0.0.1:8080/';
+  //url='http://34.145.192.59/backend';
 
 
   /**
@@ -142,6 +143,18 @@ export class DatabaseService {
         catchError(this.handleError), shareReplay(1)
       ).subscribe();
     this.router.navigate(['/browse-companies']);
+  }
+
+
+  public getApprovedStudents(): Student[]{
+    let response: Student[] = [];
+    const options = {params: new HttpParams().set('q', 'unapproved')};
+    this.http.get<any>(this.url+'students', options).pipe(catchError(this.handleError), retry(3)).subscribe(res =>{
+      res.forEach((el: Student) => {
+        response.push(el);
+      });
+    });
+    return response;
   }
 
   /**

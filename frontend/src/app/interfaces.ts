@@ -42,4 +42,5 @@ export interface Student{
     phone?: string,
     website?: string,
     biography?: string,
+    graduation_date?: Date
 }
