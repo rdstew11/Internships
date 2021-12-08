@@ -46,7 +46,7 @@ if default.conf is still enabled, remove that link
 This command should yield
 
 >nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-
+>
 >nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 **4. Restart Nginx**
@@ -91,4 +91,50 @@ The backend server will be ran in the background using **pm2**
 > pm2 status
 
 **index** should have a "running" status
+
+**6. Generate RSA key**
+
+> ssh-keygen -t rsa -b 2048 -f itRS256.key
+
+
+## Setup PSQL database
+
+**1. Ensure PSQL is installed**
+
+> sudo apt-get install postgres
+
+**2. Login to postgres**
+
+Enter your password as prompted
+
+> sudo psql -U postgres -h localhost
+
+**3. Create a postgres account for the database**
+
+Database is called "internships"
+
+> CREATE USER [username]
+
+Set a password
+
+> \p [username]
+
+**4. Initialize Database**
+
+> \i init.sql
+
+**5. Quit postgres**
+
+> \q
+
+**6. Put username and password into a .env**
+Should look like:
+>USERNAME=[yourusername] 
+>
+>PASSWORD=[yourpassword]  
+>
+>DATABASE=internships  
+>
+>HOST=localhost
+
 
