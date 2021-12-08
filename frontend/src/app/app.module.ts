@@ -21,6 +21,8 @@ import { CreateAccountFormComponent } from './create-account-form/create-account
 import { CompanySubmissionFormComponent } from './company-submission-form/company-submission-form.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StudentBrowseComponent } from './student-browse/student-browse.component';
+import { SubmitStudentComponent } from './submit-student/submit-student.component';
+import { AdminStudentProfileComponent } from './admin-student-profile/admin-student-profile.component';
 
 
 
@@ -43,6 +45,8 @@ import { StudentBrowseComponent } from './student-browse/student-browse.componen
     CompanySubmissionFormComponent,
     StudentProfileComponent,
     StudentBrowseComponent,
+    SubmitStudentComponent,
+    AdminStudentProfileComponent,
   ],
   imports: [
     BrowserModule,

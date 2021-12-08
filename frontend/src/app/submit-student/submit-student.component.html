@@ -1,0 +1,78 @@
+<div class='container text-center p-5' 
+style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100vh; max-width: 50rem;'>
+    <div style='max-width: 50rem; margin: auto;'>
+        <h1> Submit Student Profile </h1>
+        <form [formGroup]='studentGroup'  id='studentForm' (ngSubmit)='onSubmit()'>
+            <div  id='form-input'>
+                <input type='text' formControlName='firstname' placeholder='First Name'
+                [ngClass]="{'is-invalid' : submitted && f.firstname.errors }">
+                <div *ngIf='submitted && f.firstname.errors'>
+                    <div *ngIf='f.firstname.errors.required' class='alert p-0'> <p>First name is required</p> </div>
+                </div>
+            </div>
+            <div  id='form-input'>
+                <input type='text' formControlName='lastname' placeholder='Last Name'
+                [ngClass]="{'is-invalid' : submitted && f.lastname.errors }">
+                <div *ngIf='submitted && f.lastname.errors'>
+                    <div *ngIf='f.lastname.errors.required' class='alert p-0'> <p>Last name is required</p> </div>
+                </div>
+            </div>
+            <div id='form-input'>
+                <input type='text' formControlName='email' placeholder='Email'
+                [ngClass]="{'is-invalid' : submitted && f.email.errors }">
+                <div *ngIf='submitted && f.email.errors'>
+                    <div *ngIf='f.email.errors.required' class='alert p-0'> <p>Email is required</p> </div>
+                    <div *ngIf="f.email.errors.email" class='alert p-0'>Email must be a valid email address</div>
+                </div>
+            </div>
+            <div  id='form-input' class='row' >
+                <div class='col'>
+                    <select formControlName='gender'>
+                        <option value='' disabled>Select Gender</option>
+                        <option *ngFor='let gender of genders' [value]='gender'>{{gender}}</option>
+                    </select>
+                </div>
+                <div class='col'>
+                    <input type='date' formControlName='grad_date' [ngClass]="{ 'is-invalid' : submitted && f.grad_date.errors }">
+                    <div *ngIf='submitted && f.grad_date.errors'>
+                        <div *ngIf='f.grad_date.errors.required' class='alert p-0'> <p>Required</p> </div>
+                    </div>
+                </div>
+                <div class='col'>
+                    <label for='gpa'> GPA :</label>
+                    <input type='number'  style='max-width:6rem'    id='gpa' step='0.01' min='0.01' max='4.00' formControlName='gpa'>
+                </div>
+ 
+            </div>
+            <div id='form-input'>
+                <input type='text' formControlName='major' placeholder='Major'>
+                <div *ngIf='submitted && f.major.errors'>
+                    <div *ngIf='f.major.errors.required' class='alert p-0'> <p>Major is required</p> </div>
+                </div>
+            </div>
+            <div id='form input'>
+                <input type='text' formControlname='minor' placeholder='Minor'>
+            </div>
+            <div id='form-input' >
+                <input type='text' formControlName='website' placeholder='Website'>
+            </div>
+            <div id='form-input'>
+                <input type='text' formControlName='linkedin' placeholder='LinkedIn'>
+            </div>
+
+            <p class='text-left'><b>Biography</b></p>
+            <div  id='form-input'>
+                <textarea formControlName='biography'></textarea>
+            
+                <div *ngIf='submitted && f.biography.errors'>
+                    <div *ngIf='f.biography.errors.required' class='alert p-0'> <p>Biography is required</p> </div>
+                </div>
+            </div>
+
+
+
+           
+            <button type='submit'>Submit</button>
+        </form>
+    </div>
+</div>

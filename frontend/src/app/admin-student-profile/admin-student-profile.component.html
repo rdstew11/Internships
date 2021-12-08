@@ -1,0 +1,133 @@
+<div class="container p-0">
+    <div class='card'>
+        <div class='card-header'>
+            <button class='btn btn-link' data-toggle='collapse' [attr.data-target]='"#collapse-student"+student.id' aria-expanded='false'>
+                <h4 class=''>{{student.firstname}} {{student.lastname}} <span *ngIf="student.grad_date"> &mdash; {{student.major}}</span></h4>
+            </button>  
+        </div>
+        <div [id]='"collapse-student"+student.id' class="card collapse">
+            <div class="card-header text-center">
+                <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" data-toggle='tab' role='tab' 
+                    type='button' [attr.data-target]='"#about-student"+student.id' aria-selected="true">About</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-toggle='tab' role='tab' 
+                    type='button' [attr.data-target]='"#education-student"+student.id' aria-selected="false">Education</button>
+    
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-toggle='tab' role='tab' 
+                    type='button' [attr.data-target]='"#contact-student"+student.id' aria-selected="false">Contact</button>
+                </li>
+                </ul>
+            </div>
+    
+            <div class="card-body text-left">
+                <div class='tab-content'>
+                    <div class='tab-pane active' role='tabpanel' [id]='"about-student"+student.id'>
+                        <p>{{student.biography}}<p>
+                    </div>
+    
+    
+                    <div class='tab-pane' role='tabpanel'[id]='"education-student"+student.id'>
+                        <div *ngIf='student.gpa'>
+                            <label><strong>GPA: </strong></label>
+                            <p>{{student.gpa}}</p>
+                        </div>
+                        <div *ngIf='student.major'>
+                            <label><strong>Major: </strong></label>
+                            <p>{{student.major}}</p>
+                        </div>
+                        <div *ngIf='student.minor'>
+                            <label><strong>Minor: </strong></label>
+                            <p>{{student.minor}}</p>
+                        </div>
+                    </div>
+    
+    
+                    <div class='tab-pane' role='tabpanel' [id]='"contact-student"+student.id'>
+                        <label><strong>Email Address: </strong></label>
+                        <p>{{student.email}}</p>
+            
+                        <label><strong>Full Name: </strong></label>
+                        <p>{{student.firstname}} {{student.lastname}}</p>
+            
+                        <div *ngIf='student.website'>
+                            <label><strong>Website: </strong></label>
+                            <a [href]='student.website'>{{student.website}}</a>
+                        </div>
+
+                        <div *ngIf='student.linkedin'>
+                            <label><strong>LinkedIn: </strong></label>
+                            <a [href]='student.linkedin'>{{student.linkedin}}</a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div>
+                    <br>
+                    
+                    <div class='text-center'>
+                        <span class='mx-3'>
+                            <button class='btn btn-danger' type='button'
+                            data-toggle='modal' [attr.data-target]='"#deny-modal-student" + student.id'>
+                                Deny
+                            </button>
+                        </span>
+                        <span class='mx-3'>
+                            <button class='btn btn-success' type='button'
+                            data-toggle='modal' [attr.data-target]='"#approve-modal-student" + student.id'>
+                                Approve
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Approval Confirmation Modal-->
+<div class="modal fade text-center" [id]='"approve-modal-student" + student.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Approve "{{student.firstname}} {{student.lastname}}
+                    <span *ngIf='student.grad_date'>&mdash; {{student.major}}</span>"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-success' data-dismiss='modal' (click)='approve()'>Confirm Approval</button></span>
+            </div>
+        </div>
+  </div>
+</div>
+
+<div class="modal fade text-center" [id]='"deny-modal-student" + student.id' tabindex="-1"
+aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center pl-5">
+                <h5 class="modal-title mx-auto" id="modal-title">Deny "{{student.firstname}} {{student.lastname}}
+                    <span *ngIf='student.grad_date'>&mdash; {{student.major}}</span>"?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+                <p>This action will permanently delete the student profile.</p>
+                <span class='mx-3'><button class='btn' type='button' data-dismiss='modal' aria-label='Close'>Cancel</button></span>
+                <span class='mx-3'><button class='btn btn-danger' data-dismiss='modal' (click)='deny()'>Confirm Denial</button></span>
+            </div>
+        </div>
+  </div>
+</div>

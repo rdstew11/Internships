@@ -38,6 +38,42 @@ CREATE TABLE company (
 
 );
 
+DROP TABLE IF EXISTS student;
+CREATE TABLE student (
+  id SERIAL NOT NULL,
+  firstName TEXT NOT NULL,
+  lastName TEXT NOT NULL,
+  email TEXT NOT NULL,
+  grad_date DATE NOT NULL,
+  biography TEXT NOT NULL,
+  major TEXT NOT NULL,
+  minor TEXT,
+  website TEXT,
+  linkedin TEXT,
+  gender TEXT,
+  gpa FLOAT,
+  approved BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY("email")
+);
+
+INSERT INTO student (firstName, lastName, email, grad_date, major, minor, biography, website, linkedin, gender, gpa)
+VALUES
+('Ryan','Stewart','rstewart@mail.umw.edu','2021-12-15', 'Computer Science', NULL,
+'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'https://google.com', 'https://linkedin.com/in/rdstew', 'male', 0.33),
+ ('Jeff','Bezos','jeff@amazon.com', '2021-12-15', 'Computer Science', 'Data Science',
+ 'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'https://amazon.com', NULL, 'male', 3.20),
+ ('Sally','Ride','sally@nasa.gov','2022-05-14', 'Cybersecurity', 'Math',
+ 'Lorem ipsum dolor sit amet, has ne putant adipiscing. Id sea pertinacia disputando, no his ubique semper, 
+vel nominavi qualisque deseruisse et. Eu debet meliore aliquando nec, causae scaevola ad qui. Mea ei admodum definiebas.
+ Ad probo ipsum usu, id neglegentur contentiones mel.',
+ 'https://nasa.gov', NULL, 'female', 4.00);
+
 INSERT INTO accounts (username, password, account_type)
 VALUES ('admin','admin','admin');
 

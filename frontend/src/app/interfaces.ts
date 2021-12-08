@@ -35,11 +35,15 @@ export interface Company{
 
 export interface Student{
     id: number,
-    name: string,
-    resumeLink?: string,
+    firstname: string,
+    lastname: string,
+    gender?: string,
     gpa?: number,
     email: string,
-    phone?: string,
     website?: string,
-    biography?: string,
+    linkedin?: string,
+    biography: string,
+    major: string,
+    minor?: string,
+    grad_date?: Date
 }

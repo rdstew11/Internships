@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../database.service';
 
 import { Student } from '../interfaces';
 
@@ -9,11 +10,13 @@ import { Student } from '../interfaces';
 })
 export class StudentBrowseComponent implements OnInit {
 
-  students: Student[] = [{id:1, name: 'ryan', email:'hey'}];
+  students: Student[] = [];
 
-  constructor() { }
+  constructor(private backend : DatabaseService) { }
 
   ngOnInit(): void {
+    this.students = this.backend.getApprovedStudents();
+
   }
 
 }

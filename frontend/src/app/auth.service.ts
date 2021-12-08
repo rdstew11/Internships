@@ -12,7 +12,7 @@ import { LoginCredentials } from './interfaces';
   providedIn: 'root'
 })
 export class AuthService {
-
+  //loginUrl = 'http://127.0.0.1:8080/login';
   url: string = 'http://34.145.192.59/backend';
   loginUrl: string = 'http://34.145.192.59/backendlogin';
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
@@ -28,8 +28,6 @@ export class AuthService {
  */
   public login(credentials: LoginCredentials){
     //this POST request sends username and password to backend to be validated against DB
-
-    console.log(credentials);
     this.http.post<any>(this.loginUrl, credentials).pipe(catchError(this.handleLoginError),shareReplay(1)).subscribe(res => {
       this.setSession(res);
     });

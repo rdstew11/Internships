@@ -1,10 +1,10 @@
-<div class='container p-5 ' style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100vh;'>
+<div class='container p-5 ' style='border-left: 3px solid #910000;  border-right: 3px solid #910000;background-color: #FBFAF5; height: 100%; min-height: 100vh;'>
     <h1 class='text-center mx-auto'><b>Admin Portal</b></h1>
     <div>
         <h3><b>Jobs</b></h3>
         <ul style='list-style: none;' class='p-0 bg-white'>
             <li *ngFor='let job of jobs'>
-                <admin-job-preview [id]='job.id' [job]='job' (removeItemEvent)='removeJobItem($event)'></admin-job-preview>
+                <admin-job-preview [id]='"job"+job.id' [job]='job' (removeItemEvent)='removeJobItem($event)'></admin-job-preview>
             </li>
         </ul>
         <p *ngIf='jobs.length == 0'>There are no jobs waiting approval...</p>
@@ -14,10 +14,21 @@
         <h3><b>Companies</b></h3>
         <ul style='list-style: none;' class='p-0 bg-white'>
             <li *ngFor='let company of companies'>
-                <admin-company-profile [id]='company.id' [company]='company' (removeItemEvent)='removeCompanyItem($event)'></admin-company-profile>
+                <admin-company-profile [id]='"company"+ company.id' [company]='company' (removeItemEvent)='removeCompanyItem($event)'></admin-company-profile>
             </li>
         </ul>
         <p *ngIf='companies.length == 0'>There are no companies waiting approval...</p>
+    </div>
+
+
+    <div class='mt-5'>
+        <h3><b>Students</b></h3>
+        <ul style='list-style: none;' class='p-0 bg-white'>
+            <li *ngFor='let student of students'>
+                <admin-student-profile [id]='"student"+student.id' [student]='student' (removeItemEvent)='removeStudentItem($event)'></admin-student-profile>
+            </li>
+        </ul>
+        <p *ngIf='students.length == 0'>There are no students waiting approval...</p>
     </div>
     
 </div>
