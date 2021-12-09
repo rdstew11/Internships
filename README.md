@@ -39,7 +39,7 @@ if default.conf is still enabled, remove that link
 
 > sudo rm default
 
-**3. Make sure Nginx is still working 
+**3. Make sure Nginx is still working**
 
 > sudo nginx -t
 
